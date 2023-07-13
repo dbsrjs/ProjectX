@@ -11,7 +11,9 @@ public class Cam : MonoBehaviour
     {
         if (target != null)
         {
-            //Vector3 vec = new Vector3(target.position.x, target.position.y, -10f);
+            Vector3 v1 = target.position;
+            v1.z = -10f;
+            transform.position = Vector3.Lerp(transform.position, v1, Time.deltaTime * 5f);
         }
     }
 }
