@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class Ui : MonoBehaviour
 {
+    [SerializeField] private RectTransform canvas;
+    //0 : 위 1 : 아래 : 2 왼쪽 : 3 오른쪽 : 4
+    [SerializeField] private BoxCollider2D[] boxColls;
+
+
     [SerializeField] private Slider sliderExp;
     [SerializeField] private Text txtTime;
     [SerializeField] private Text txtKillConunt;
@@ -43,7 +48,8 @@ public class Ui : MonoBehaviour
         get { return KillCount; }
         set
         {
-
+            KillCount = value;
+            txtKillConunt.text = $"{KillCount}";
         }
     }
 
@@ -54,6 +60,19 @@ public class Ui : MonoBehaviour
         sliderExp.value = 0f;
         exp = 0; sliderExp.value = 0f;
         txtLv.text = $"Lv.{level + 1}";
+
+        
+        
+
+        for (int i = 0; i < boxColls.Length; i++)
+        {
+            Vector2 v1 = canvas.sizeDelta;
+            if (i < 2)
+                v1.y = 5;
+            else
+                v1.x = 5;
+            boxColls[i].size = v1;
+        }
     }
 
     // Update is called once per frame

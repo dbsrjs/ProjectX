@@ -26,23 +26,16 @@ public class Player : MonoBehaviour
 
         if ((x == 0 && y == 0) && hp != 0)
         {
-            animator.SetTrigger("idle");
+            animator.SetTrigger("idle");    //서있는 이미지
         }
         else if(hp != 0)
         {
-            animator.SetTrigger("run");
+            animator.SetTrigger("run");    //달리는 이미지
         }
 
         if (x != 0)
         {
-            if (x < 0)
-            {
-                sr.flipX = true;
-            }
-            else
-            {
-                sr.flipX = false;
-            }
+            sr.flipX = x < 0 ? true : false;    //보는 방향 변경
         }
     }
 }

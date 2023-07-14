@@ -11,12 +11,6 @@ public class CharacterChoice : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnChoice()
     {
         SceneManager.LoadScene("Game");
