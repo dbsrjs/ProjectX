@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 405542259}
   - component: {fileID: 405542258}
   m_Layer: 5
-  m_Name: MonsterSpawn
+  m_Name: '[ MonsterSpawnCountroller ]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9425,7 +9425,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 978012912, guid: 99a24620d31e5ce4e823c32d11e17c2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -18155,6 +18155,7 @@ MonoBehaviour:
   txtTime: {fileID: 1197239770}
   txtKillConunt: {fileID: 1734595748}
   txtLv: {fileID: 1153338266}
+  hpImg: {fileID: 1180672883}
 --- !u!1 &1890239643
 GameObject:
   m_ObjectHideFlags: 0

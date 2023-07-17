@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer sr;
 
-    float hp = 100;
+    int hp, maxhp = 100;
     float x, y;
     // Start is called before the first frame update
     void Start()
@@ -37,5 +37,11 @@ public class Player : MonoBehaviour
         {
             sr.flipX = x < 0 ? true : false;    //보는 방향 변경
         }
+    }
+
+    public void Hit(int damage)
+    {
+        hp -= damage;
+        Ui.instance.SetHp(hp, maxhp);
     }
 }

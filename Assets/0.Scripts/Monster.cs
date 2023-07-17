@@ -6,6 +6,11 @@ public class Monster : MonoBehaviour
 {
     private Player p;
     [SerializeField] private SpriteRenderer sr;
+
+    protected float atkTime = 2f;    //공격 속도
+    protected int power = 10;
+
+    private float atkTimer;
     // tart is called before the first frame update
     void Start()
     {
@@ -27,11 +32,16 @@ public class Monster : MonoBehaviour
 
         if (distance <= 1)   //공격
         {
-
+            atkTimer += Time.deltaTime;
+            if (atkTimer > atkTime)
+            {
+                atkTimer = 0;
+                p.Hit(power);
+            }
         }
         else    //이동
         {
-            Vector2 v1 = (p.transform.position - transform.position).normalized * Time.deltaTime * 3f;
+            Vector2 v1 = (p.transform.position - transform.position).normalized * Time.deltaTime * 2f;
             transform.Translate(v1);
         }
     }
