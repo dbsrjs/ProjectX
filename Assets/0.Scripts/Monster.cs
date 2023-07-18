@@ -30,7 +30,7 @@ public class Monster : MonoBehaviour
             return;
 
         if (hitFrezeTimer > 0)     //0.5초 동안 정지
-        {
+        {            
             hitFrezeTimer -= Time.deltaTime;
             return;
         }
@@ -68,13 +68,15 @@ public class Monster : MonoBehaviour
         {
             hitFrezeTimer = 0.5f;   //일시 정지
             hp -= 10;
+            animator.SetTrigger("hit");           
             if (hp <= 0)
             {
-                Destroy(GetComponent<Rigidbody>());    //Rigidbody 삭제
-                GetComponent<CapsuleCollider2D>().enabled = false;
+                Destroy(GetComponent<Rigidbody2D>());    //Rigidbody2D 삭제
+                GetComponent<CapsuleCollider2D>().enabled = false;  //CapsuleCollider2D OF
                 animator.SetTrigger("dead");
                 Invoke("DropExp", 1f);
             }
+            animator.SetTrigger("run");
         }
     }
 

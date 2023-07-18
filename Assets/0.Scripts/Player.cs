@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         hp = maxhp = 100;
-        shieldSpeed = 40;
+        shieldSpeed = 50;
     }
 
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
             Shield();
         }
 
-        if (Input.GetKeyDown(KeyCode.F2))
+        if (Input.GetKeyDown(KeyCode.F2))   //test
         {
             shieldCount--;
         }
