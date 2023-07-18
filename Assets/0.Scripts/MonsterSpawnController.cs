@@ -13,7 +13,7 @@ public class MonsterSpawnController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("CreateMonster", 1, 1);
+        InvokeRepeating("CreateMonster", 1, 3);   //호출할 함수 이름, 첫 호출 시간, 반복 호출 간격
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class MonsterSpawnController : MonoBehaviour
     void CreateMonster()
     {
         int rand = Random.Range(0, boxColls.Length);
-        Vector2 v = RandomPosition(boxColls[rand]);
+        Vector2 v = RandomPosition(boxColls[rand]);    //랜덤 위치
 
         Monster m = Instantiate(monster, v, Quaternion.identity);
         m.SetPlayer(p);
@@ -38,8 +38,8 @@ public class MonsterSpawnController : MonoBehaviour
 
         Vector2 range = new Vector2(boxColl.bounds.size.x, boxColl.bounds.size.y);
 
-        range.x = Random.Range((range.x / 2) * -1, range.x / 2);
-        range.y = Random.Range((range.y / 2) * -1, range.y / 2);
+        range.x = Random.Range((range.x / 2) * -1, range.x / 2);    //boxColl 크기 지정(X)
+        range.y = Random.Range((range.y / 2) * -1, range.y / 2);    //boxColl 크기 지정(Y)
 
         return pos + range;
     }

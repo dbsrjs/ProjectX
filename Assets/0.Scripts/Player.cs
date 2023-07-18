@@ -8,19 +8,26 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer sr;
 
-    int hp, maxhp = 100;
+    [SerializeField] private Transform ShieldPrefab;
+    [SerializeField] private Transform shieldParent;
+
+    private List<Transform> shields = new List<Transform>();
+
+    int hp, maxhp, shieldCount, shieldSpeed;
     float x, y;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        hp = maxhp = 100;
+        shieldSpeed = 40;
     }
 
     // Update is called once per frame
     void Update()
     {
-        x = Input.GetAxis("Horizontal");    //A. D
-        y = Input.GetAxis("Vertical");      //W, S
+        x = Input.GetAxis("Horizontal");    //플레이어 이동(A. D)
+        y = Input.GetAxis("Vertical");      //플레이어 이동(W, S)
 
         transform.Translate(new Vector3(x, y, 0f) * Time.deltaTime * speed);
 
@@ -37,11 +44,43 @@ public class Player : MonoBehaviour
         {
             sr.flipX = x < 0 ? true : false;    //보는 방향 변경
         }
+
+        if(Input.GetKeyDown(KeyCode.F1))    //test
+        {
+            shieldCount++;
+            shields.Add(Instantiate(ShieldPrefab, shieldParent));
+            Shield();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            shieldCount--;
+        }
+
+        shieldParent.Rotate(Vector3.back * Time.deltaTime * shieldSpeed);   //bullet 오른쪽으로 회전
     }
 
-    public void Hit(int damage)
+    public void Hit(int damage)    //damage = power(Monster) = 10;
     {
         hp -= damage;
         Ui.instance.SetHp(hp, maxhp);
+    }
+
+    public void Shield()
+    {
+        float z = 360 / shieldCount;
+        for (int i = 0; i < shieldCount; i++)
+        {
+            shields[i].rotation = Quaternion.Euler(0, 0, z * i);    //Quaternion.Euler : 오브젝트를 회전시키는데 사용
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Item>())
+        {
+            collision.GetComponent<Item>().isPickup = true;
+            collision.GetComponent<Item>().target = transform;
+        }
     }
 }

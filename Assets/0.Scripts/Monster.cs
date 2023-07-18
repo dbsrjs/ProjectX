@@ -6,11 +6,17 @@ public class Monster : MonoBehaviour
 {
     private Player p;
     [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject expPrefab;
 
     protected float atkTime = 2f;    //공격 속도
     protected int power = 10;
+    protected int hp = 50;
 
     private float atkTimer;
+
+    private float hitFrezeTimer;    //일시 정지
+
     // tart is called before the first frame update
     void Start()
     {
@@ -20,13 +26,18 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (p == null)
+        if (p == null || hp <= 0)
+            return;
+
+        if (hitFrezeTimer > 0)     //0.5초 동안 정지
         {
+            hitFrezeTimer -= Time.deltaTime;
             return;
         }
+
         float x = p.transform.position.x - transform.position.x;
 
-        sr.flipX = x < 0 ? true : x == 0 ? true : false;    //타겟 위치에 따라 보는 방향 변경
+        sr.flipX = x < 0 ? true : x == 0 ? true : false;    //타겟(플레이어) 위치에 따라 보는 방향 변경
 
         float distance = Vector2.Distance(p.transform.position, transform.position);
 
@@ -49,5 +60,28 @@ public class Monster : MonoBehaviour
     public void SetPlayer(Player p)
     {
         this.p = p;
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Shield>())
+        {
+            hitFrezeTimer = 0.5f;   //일시 정지
+            hp -= 10;
+            if (hp <= 0)
+            {
+                Destroy(GetComponent<Rigidbody>());    //Rigidbody 삭제
+                GetComponent<CapsuleCollider2D>().enabled = false;
+                animator.SetTrigger("dead");
+                Invoke("DropExp", 1f);
+            }
+        }
+    }
+
+    IEnumerator DropExp()
+    {
+        Instantiate(expPrefab, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(2f);
+        Destroy(transform);
     }
 }

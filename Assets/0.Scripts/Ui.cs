@@ -81,11 +81,6 @@ public class Ui : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.F1))    //test
-        {
-            Exp += 1f;
-        }
-
         timer += Time.deltaTime;
         System.TimeSpan ts = System.TimeSpan.FromSeconds(timer);
         txtTime.text = string.Format("{0:0}:{1:00}", ts.Minutes, ts.Seconds);
