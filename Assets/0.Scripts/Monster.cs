@@ -68,22 +68,22 @@ public class Monster : MonoBehaviour
         {
             hitFrezeTimer = 0.5f;   //일시 정지
             hp -= 10;
-            animator.SetTrigger("hit");           
-            if (hp <= 0)
+            if (hp <= 0)    //죽으면
             {
                 Destroy(GetComponent<Rigidbody2D>());    //Rigidbody2D 삭제
                 GetComponent<CapsuleCollider2D>().enabled = false;  //CapsuleCollider2D OF
                 animator.SetTrigger("dead");
-                Invoke("DropExp", 1f);
+                //Invoke("DropExp", 1f);
+                StartCoroutine("CDropExp");
             }
-            animator.SetTrigger("run");
         }
     }
 
-    IEnumerator DropExp()
-    {
+    IEnumerator CDropExp()
+    {       
+        yield return new WaitForSeconds(1f);    //1초 뒤에
         Instantiate(expPrefab, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(2f);
-        Destroy(transform);
+        yield return new WaitForSeconds(2f);    //2초 뒤에
+        Destroy(gameObject);    //죽은 몬스터 삭제
     }
 }

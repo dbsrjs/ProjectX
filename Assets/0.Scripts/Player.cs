@@ -11,16 +11,44 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform ShieldPrefab;
     [SerializeField] private Transform shieldParent;
 
+    [SerializeField] private Transform firePos;
+    [SerializeField] private Bullet bullet;
+
     private List<Transform> shields = new List<Transform>();
 
-    int hp, maxhp, shieldCount, shieldSpeed;
-    float x, y;
+    float bulletTimer;
 
+    int hp, maxhp, shieldCount, shieldSpeed,level;
+    float x, y, exp, maxpExp;
+
+    public float Exp
+    {
+        get { return exp; }
+        set
+        {
+            exp = value;
+            Ui.instance.SetExp(ref exp, ref maxpExp, ref level);
+        }
+    }
+
+    public float maxExp
+    {
+        set
+        {
+            
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         hp = maxhp = 100;
         shieldSpeed = 50;
+
+        exp = 0;
+        maxExp = 100;
+
+        level = 0;
+        Ui.instance.Level = level + 1;
     }
 
     // Update is called once per frame
@@ -45,19 +73,49 @@ public class Player : MonoBehaviour
             sr.flipX = x < 0 ? true : false;    //보는 방향 변경
         }
 
-        if(Input.GetKeyDown(KeyCode.F1))    //test
+        if(Input.GetKeyDown(KeyCode.F1))    //shield 개수 증가
         {
             shieldCount++;
             shields.Add(Instantiate(ShieldPrefab, shieldParent));
             Shield();
         }
 
-        if (Input.GetKeyDown(KeyCode.F2))   //test
+        if (Input.GetKeyDown(KeyCode.F2))   //shield 속도 증가
         {
-            shieldCount--;
+            shieldSpeed += 10;
         }
 
-        shieldParent.Rotate(Vector3.back * Time.deltaTime * shieldSpeed);   //bullet 오른쪽으로 회전
+        shieldParent.Rotate(Vector3.back * Time.deltaTime * shieldSpeed);   //shield 오른쪽으로 회전
+
+        Monster[] monsters = FindObjectsOfType<Monster>();
+        List<Monster> atkMonsterList = new List<Monster>();
+        bulletTimer += Time.deltaTime;
+
+        if (monsters.Length > 0 && bulletTimer > 2f)
+        {
+            foreach (Monster m in monsters)
+            {
+                float distance = Vector3.Distance(transform.position, m.transform.position);
+                if (distance < 4)
+                {
+                    atkMonsterList.Add(m);
+                }
+            }
+
+            if (atkMonsterList.Count > 0)
+            {
+                Monster m = atkMonsterList[Random.Range(0, atkMonsterList.Count)];
+
+                //타겟을 찾아 방향 전환
+                Vector2 vec = transform.position - m.transform.position;
+                float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
+                firePos.rotation = Quaternion.AngleAxis(angle - 180, Vector3.back);
+                Bullet b = Instantiate(bullet, firePos);
+                b.transform.SetParent(null);
+
+            }
+            bulletTimer = 0;
+        }
     }
 
     public void Hit(int damage)    //damage = power(Monster) = 10;
@@ -79,8 +137,8 @@ public class Player : MonoBehaviour
     {
         if (collision.GetComponent<Item>())
         {
+            collision.GetComponent<Item>().target = transform;  //target 지정(Player)
             collision.GetComponent<Item>().isPickup = true;
-            collision.GetComponent<Item>().target = transform;
         }
     }
 }

@@ -7,6 +7,8 @@ public class Ui : MonoBehaviour
 {
     public static Ui instance;
 
+    [SerializeField] private Player p;
+
     [SerializeField] private RectTransform canvas;
     //0 : 위 1 : 아래 : 2 왼쪽 : 3 오른쪽 : 4
     [SerializeField] private BoxCollider2D[] boxColls;
@@ -17,31 +19,23 @@ public class Ui : MonoBehaviour
     [SerializeField] private Text txtKillConunt;
     [SerializeField] private Text txtLv;
 
-    private float maxExp;
-    private float exp;
-
-    private int level = 0;
     private float timer = 0;
+
+    private int killCount = 0;
     //Simple Code
     private float[] exps = { 100f, 200f, 300f, 400f, 500f };
 
-    public float Exp    //레벨
+    public void SetExp(ref float exp, ref float maxExp, ref int level)    //레벨
     {
-        get { return exp; }
-        set
+
+        sliderExp.value = exp / maxExp;
+
+        if (exp >= maxExp)
         {
-            exp = value;
-            sliderExp.value = exp / maxExp;
-
-            if (exp >= maxExp)
-            {
-                level++;    //레벨 증가
-                maxExp = exps[level];
-                sliderExp.value = 0f;
-                exp = 0;
-
-                txtLv.text = $"Lv.{level + 1}";
-            }
+            Level = (++level) + 1;  //레벨 증가
+            maxExp = exps[level];
+            sliderExp.value = 0f;
+            exp = 0;
         }
     }
 
@@ -55,17 +49,26 @@ public class Ui : MonoBehaviour
         }
     }
 
+    public int Level
+    {
+        set
+        {
+            txtLv.text = $"Lv.{value}";    //Level UI
+
+        }
+    }
+
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
-
-        maxExp = exps[level];
         sliderExp.value = 0f;
-        exp = 0; sliderExp.value = 0f;
-        txtLv.text = $"Lv.{level + 1}";    //Level UI
-
-        
 
         for (int i = 0; i < boxColls.Length; i++)   // 몬스터 스폰 오브젝트 위치 고정
         {

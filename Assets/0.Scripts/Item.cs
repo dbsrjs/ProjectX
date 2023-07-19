@@ -5,7 +5,9 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public bool isPickup = false;
-    public Transform target;
+    public Transform target;    // target = Player
+
+    float exp = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +20,14 @@ public class Item : MonoBehaviour
     {
         if (isPickup)
         {
-            transform.position = Vector3.Lerp(target.position, transform.position, 10f);
+            float distance = Vector3.Distance(transform.position, target.position);
+            transform.position = Vector3.Lerp(transform.position, target.position, (Time.deltaTime * distance) * 2f);
+
+            if (distance < 1f)
+            {
+                target.GetComponent<Player>().Exp += exp;   //경험치 증가
+                Destroy(gameObject);    //UI 삭제
+            }
         }
     }
 }
