@@ -54,6 +54,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Ui.instance.gamestate != GameState.play)
+            return;
+
         x = Input.GetAxis("Horizontal");    //플레이어 이동(A. D)
         y = Input.GetAxis("Vertical");      //플레이어 이동(W, S)
 
@@ -139,6 +142,16 @@ public class Player : MonoBehaviour
         {
             collision.GetComponent<Item>().target = transform;  //target 지정(Player)
             collision.GetComponent<Item>().isPickup = true;
+        }
+
+        if (collision.gameObject.name == "Mag")
+        {
+            Item[] items = FindObjectsOfType<Item>();
+            foreach (var item in items)
+            {
+                item.target = transform;
+                item.isPickup = true;
+            }
         }
     }
 }

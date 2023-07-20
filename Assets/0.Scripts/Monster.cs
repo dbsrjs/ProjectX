@@ -26,6 +26,9 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Ui.instance.gamestate != GameState.play)
+            return;
+
         if (p == null || hp <= 0)
             return;
 
@@ -64,24 +67,35 @@ public class Monster : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Shield>())
+        if (collision.GetComponent<Shield>())   //Shield(삽)과 충돌
         {
-            hitFrezeTimer = 0.5f;   //일시 정지
-            hp -= 10;
-            if (hp <= 0)    //죽으면
-            {
-                Destroy(GetComponent<Rigidbody2D>());    //Rigidbody2D 삭제
-                GetComponent<CapsuleCollider2D>().enabled = false;  //CapsuleCollider2D OF
-                animator.SetTrigger("dead");
-                //Invoke("DropExp", 1f);
-                StartCoroutine("CDropExp");
-            }
+            Dead(0.5f, 30);
+        }
+
+        if(collision.GetComponent<Bullet>())    //총알과 충돌
+        {
+            Dead(1f, 50);
+            Destroy(collision.gameObject);
+        }
+    }
+
+    void Dead(float frezeTime, int damage)
+    {
+        hitFrezeTimer = frezeTime;
+        hp -= damage;
+        if (hp <= 0)    //죽으면
+        {
+            Destroy(GetComponent<Rigidbody2D>());    //Rigidbody2D 삭제
+            GetComponent<CapsuleCollider2D>().enabled = false;  //CapsuleCollider2D OF
+            animator.SetTrigger("dead");
+            StartCoroutine("CDropExp");
         }
     }
 
     IEnumerator CDropExp()
-    {       
-        yield return new WaitForSeconds(1f);    //1초 뒤에
+    {
+        Ui.instance.KillCount++;
+        yield return new WaitForSeconds(0.5f);    //0.5초 뒤에
         Instantiate(expPrefab, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(2f);    //2초 뒤에
         Destroy(gameObject);    //죽은 몬스터 삭제

@@ -10,6 +10,8 @@ public class MonsterSpawnController : MonoBehaviour
     [SerializeField] private Transform parent;
 
     [SerializeField] private BoxCollider2D[] boxColls;
+
+    float spawnTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,14 @@ public class MonsterSpawnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Ui.instance.gamestate != GameState.play)
+            return;
 
+        if(spawnTimer > 3)
+        {
+            spawnTimer = 0;
+            CreateMonster();
+        }
     }
 
     void CreateMonster()

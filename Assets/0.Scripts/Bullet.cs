@@ -13,6 +13,9 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Ui.instance.gamestate != GameState.play)
+            return;
+
         transform.Translate(Vector3.right * Time.deltaTime * 15f);  //오른쪽으로 회전
     }
 }

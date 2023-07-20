@@ -3,21 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum GameState
+{
+    play,
+    Pause,
+    Stop,
+}
+
+[System.Serializable]
+public class UpgradeData
+{
+    public Sprite sprite;
+    public string title;
+    public string desc1;
+    public string desc2;
+}
+
 public class Ui : MonoBehaviour
 {
     public static Ui instance;
 
+    [SerializeField] private UpgradeData[] upData;
+
+    [HideInInspector] public GameState gamestate = GameState.Stop;
+
     [SerializeField] private Player p;
 
     [SerializeField] private RectTransform canvas;
+    [SerializeField] private Transform LevelUpPopup;
     //0 : 위 1 : 아래 : 2 왼쪽 : 3 오른쪽 : 4
     [SerializeField] private BoxCollider2D[] boxColls;
-
 
     [SerializeField] private Slider sliderExp;
     [SerializeField] private Text txtTime;
     [SerializeField] private Text txtKillConunt;
     [SerializeField] private Text txtLv;
+
+    [SerializeField] private Image hpImg;
 
     private float timer = 0;
 
@@ -32,6 +54,8 @@ public class Ui : MonoBehaviour
 
         if (exp >= maxExp)
         {
+            gamestate = GameState.Pause;    //게임 일시 정지
+            LevelUpPopup.gameObject.SetActive(true);
             Level = (++level) + 1;  //레벨 증가
             maxExp = exps[level];
             sliderExp.value = 0f;
@@ -41,11 +65,11 @@ public class Ui : MonoBehaviour
 
     public int KillCount
     {
-        get { return KillCount; }
+        get { return killCount; }
         set
         {
-            KillCount = value;
-            txtKillConunt.text = $"{KillCount}";
+            killCount = value;
+            txtKillConunt.text = $"{killCount.ToString("000")}";
         }
     }
 
@@ -67,6 +91,8 @@ public class Ui : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OnGameStart();
+
         instance = this;
         sliderExp.value = 0f;
 
@@ -84,14 +110,26 @@ public class Ui : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.F5))
+        {
+            gamestate = GameState.play; //게임 재개
+        }
+
+        if(gamestate != GameState.play)
+            return;
+
         timer += Time.deltaTime;
         System.TimeSpan ts = System.TimeSpan.FromSeconds(timer);
-        txtTime.text = string.Format("{0:0}:{1:00}", ts.Minutes, ts.Seconds);
+        txtTime.text = string.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);
     }
-
-    [SerializeField] private Image hpImg;
+   
     public void SetHp(int HP, int maxHP)
     {
         hpImg.fillAmount = (float)HP / maxHP;
+    }
+
+    public void OnGameStart()
+    {
+        gamestate = GameState.play;
     }
 }
