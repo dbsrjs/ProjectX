@@ -15,7 +15,7 @@ public class MonsterSpawnController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("CreateMonster", 1, 3);   //호출할 함수 이름, 첫 호출 시간, 반복 호출 간격
+        InvokeRepeating("CreateMonster", 1, 1);   //호출할 함수 이름, 첫 호출 시간, 반복 호출 간격
     }
 
     // Update is called once per frame

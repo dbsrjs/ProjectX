@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 350629388}
   - component: {fileID: 350629387}
   - component: {fileID: 350629386}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}

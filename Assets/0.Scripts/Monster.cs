@@ -11,7 +11,7 @@ public class Monster : MonoBehaviour
 
     protected float atkTime = 2f;    //공격 속도
     protected int power = 10;
-    protected int hp = 50;
+    protected int hp = 100;
 
     private float atkTimer;
 
