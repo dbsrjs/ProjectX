@@ -7,8 +7,8 @@ public class Monster : MonoBehaviour
     private Player p;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Animator animator;
-    [SerializeField] private GameObject expPrefab;
-
+    [SerializeField] private GameObject[] expPrefab;
+    
     protected float atkTime = 2f;    //공격 속도
     protected int power = 10;
     protected int hp = 100;
@@ -69,13 +69,17 @@ public class Monster : MonoBehaviour
     {
         if (collision.GetComponent<Shield>())   //Shield(삽)과 충돌
         {
-            Dead(0.5f, 30);
+            Dead(0.2f, 30);
         }
 
-        if(collision.GetComponent<Bullet>())    //총알과 충돌
+        else if(collision.GetComponent<Bullet>())    //총알과 충돌
         {
-            Dead(1f, 50);
-            Destroy(collision.gameObject);
+            collision.GetComponent<Bullet>().HitCount++;
+            if (collision.GetComponent<Bullet>().HitCount >= collision.GetComponent<Bullet>().HitMaxCount)
+            {
+                Destroy(collision.gameObject);
+            }
+            Dead(0.5f, 20);
         }
     }
 
@@ -83,6 +87,8 @@ public class Monster : MonoBehaviour
     {
         hitFrezeTimer = frezeTime;
         hp -= damage;
+        animator.SetTrigger("hit");
+        AudioManager.instance.Play("Hit1");
         if (hp <= 0)    //죽으면
         {
             Destroy(GetComponent<Rigidbody2D>());    //Rigidbody2D 삭제
@@ -96,7 +102,13 @@ public class Monster : MonoBehaviour
     {
         Ui.instance.KillCount++;
         yield return new WaitForSeconds(0.5f);    //0.5초 뒤에
-        Instantiate(expPrefab, transform.position, Quaternion.identity);
+        int rand = Random.Range(0, 101);    //경험치 아이템 드랍률
+        if(rand < 70)
+            Instantiate(expPrefab[0], transform.position, Quaternion.identity);
+        else if (rand < 90)
+            Instantiate(expPrefab[1], transform.position, Quaternion.identity);
+        else
+            Instantiate(expPrefab[2], transform.position, Quaternion.identity);
         yield return new WaitForSeconds(2f);    //2초 뒤에
         Destroy(gameObject);    //죽은 몬스터 삭제
     }

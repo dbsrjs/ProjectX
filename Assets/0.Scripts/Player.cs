@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     int hp, maxhp, shieldCount, shieldSpeed,level;
     float x, y, exp, maxpExp;
 
+    public int BulletHitMaxCount { get; set; }
+
     public float Exp
     {
         get { return exp; }
@@ -114,10 +116,15 @@ public class Player : MonoBehaviour
                 float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
                 firePos.rotation = Quaternion.AngleAxis(angle - 180, Vector3.back);
                 Bullet b = Instantiate(bullet, firePos);
+                b.SetHitMaxCount(BulletHitMaxCount + 1);
                 b.transform.SetParent(null);
-
             }
             bulletTimer = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            //bullet.
         }
     }
 

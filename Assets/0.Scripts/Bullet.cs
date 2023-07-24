@@ -4,9 +4,22 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
+    public int HitCount
+    {
+        get; set;
+    }
+
+    public int HitMaxCount
+    {
+        get; set;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        HitCount = 0;
+        HitMaxCount = 1;
         Destroy(gameObject, 2f);
     }
 
@@ -17,5 +30,10 @@ public class Bullet : MonoBehaviour
             return;
 
         transform.Translate(Vector3.right * Time.deltaTime * 15f);  //오른쪽으로 회전
+    }
+
+    public void SetHitMaxCount(int count)
+    {
+        HitMaxCount = count;
     }
 }

@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public enum Type
+    {
+        Exp,
+        Mag
+    }
+
     public bool isPickup = false;
     public Transform target;    // target = Player
 
-    float exp = 10;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    protected Type type = Type.Exp;
+    protected float exp = 10;
 
     // Update is called once per frame
     void Update()

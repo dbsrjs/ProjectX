@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5400990476550053522}
-  - component: {fileID: -2213747098148126937}
+  - component: {fileID: -6625985796988183265}
   - component: {fileID: 2284863871502751487}
   - component: {fileID: 3296925456034463829}
   m_Layer: 9
-  m_Name: Exp 0
+  m_Name: Exp 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2213747098148126937
+--- !u!114 &-6625985796988183265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9093270398808336468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8d0a701df64a4b4b87cb7cde6a8532b, type: 3}
+  m_Script: {fileID: 11500000, guid: dbe572a81fbd8ba4094be5fa34f432b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isPickup: 0
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 362616440, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  m_Sprite: {fileID: -1997803578, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
