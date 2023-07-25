@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum GameState
 {
-    play,
+    Play,
     Pause,
     Stop,
 }
 
 [System.Serializable]
-public class UpgradeData
+public class UpgradeData    //업그레이드 목록
 {
     public Sprite sprite;
     public string title;
@@ -19,46 +20,58 @@ public class UpgradeData
     public string desc2;
 }
 
-public class Ui : MonoBehaviour
+[System.Serializable]
+public class UpgradeUI
 {
-    public static Ui instance;
+    public Image icon;
+    public TMP_Text levelTxt;
+    public TMP_Text title;
+    public TMP_Text desc1;
+    public TMP_Text desc2;
+}
+
+// 아이템 : 삽, 엽총 음료수(피회복), 전투장화, 전투장갑
+public class UI : MonoBehaviour
+{
+    public static UI instance;
 
     [SerializeField] private UpgradeData[] upData;
+    [SerializeField] private UpgradeUI[] upUI;
 
     [HideInInspector] public GameState gamestate = GameState.Stop;
 
     [SerializeField] private Player p;
 
     [SerializeField] private RectTransform canvas;
-    [SerializeField] private Transform LevelUpPopup;
-
-    //0 : 위 1 : 아래 : 2 왼쪽 : 3 오른쪽 : 4
+    [SerializeField] private Transform levelupPopup;
+    // 0 위 1 아래 2 왼 3 오
     [SerializeField] private BoxCollider2D[] boxColls;
 
     [SerializeField] private Slider sliderExp;
     [SerializeField] private Text txtTime;
-    [SerializeField] private Text txtKillConunt;
+    [SerializeField] private Text txtKillCount;
     [SerializeField] private Text txtLv;
-
     [SerializeField] private Image hpImg;
 
     private float timer = 0;
 
     private int killCount = 0;
-    //Simple Code
-    private float[] exps = { 100f, 200f, 300f, 400f, 500f };
 
-    public void SetExp(ref float exp, ref float maxExp, ref int level)    //레벨
+    private List<UpgradeData> upgradeDatas = new List<UpgradeData>();
+
+
+    public void SetExp(ref float exp, ref float maxExp, ref int level)  //레벨
     {
-
         sliderExp.value = exp / maxExp;
 
         if (exp >= maxExp)
         {
+            AudioManager.instance.Play("levelup");
+            SetUpgradeData();
             gamestate = GameState.Pause;    //게임 일시 정지
-            LevelUpPopup.gameObject.SetActive(true);
+            levelupPopup.gameObject.SetActive(true);
             Level = (++level) + 1;  //레벨 증가
-            maxExp = exps[level];
+            maxExp += 150;
             sliderExp.value = 0f;
             exp = 0;
         }
@@ -70,7 +83,7 @@ public class Ui : MonoBehaviour
         set
         {
             killCount = value;
-            txtKillConunt.text = $"{killCount.ToString("000")}";
+            txtKillCount.text = $"{killCount.ToString("000")}";
         }
     }
 
@@ -78,25 +91,20 @@ public class Ui : MonoBehaviour
     {
         set
         {
-            txtLv.text = $"Lv.{value}";    //Level UI
-
+            txtLv.text = $"Lv.{value}";    //Level  이미지 변경
         }
     }
-
 
     private void Awake()
     {
         instance = this;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         OnGameStart();
-
-        instance = this;
         sliderExp.value = 0f;
-
+        
         for (int i = 0; i < boxColls.Length; i++)   // 몬스터 스폰 오브젝트 위치 고정
         {
             Vector2 v1 = canvas.sizeDelta;
@@ -106,31 +114,91 @@ public class Ui : MonoBehaviour
                 v1.x = 5;
             boxColls[i].size = v1;
         }
+
+        levelupPopup.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F5))
+        if (Input.GetKeyDown(KeyCode.F5))
         {
-            gamestate = GameState.play; //게임 재개
+            gamestate = GameState.Play; //게임 재개
         }
 
-        if(gamestate != GameState.play)
+        if (gamestate != GameState.Play)
             return;
 
         timer += Time.deltaTime;
         System.TimeSpan ts = System.TimeSpan.FromSeconds(timer);
-        txtTime.text = string.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);
+        txtTime.text = string.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);     //타이머 텍스트
     }
-   
-    public void SetHp(int HP, int maxHP)
+    
+    public void SetHP(int HP, int maxHP)
     {
         hpImg.fillAmount = (float)HP / maxHP;
-    }
+    }    
 
     public void OnGameStart()
     {
-        gamestate = GameState.play;
+        gamestate = GameState.Play;
+    }
+
+    void SetUpgradeData()
+    {
+        List<UpgradeData> datas = new List<UpgradeData>();
+        for (int i = 0; i < upData.Length; i++)
+        {
+            UpgradeData ud = new UpgradeData();
+            ud.sprite = upData[i].sprite;
+            ud.title = upData[i].title;
+            ud.desc1 = upData[i].desc1;
+            ud.desc2 = upData[i].desc2;
+            datas.Add(ud);
+        }
+
+        upgradeDatas = new List<UpgradeData>();
+        for (int i = 0; i < 3; i++)
+        {
+            int rand = Random.Range(0, datas.Count);
+            UpgradeData ud = new UpgradeData();
+            ud.sprite = datas[rand].sprite;
+            ud.title = datas[rand].title;
+            ud.desc1 = datas[rand].desc1;
+            ud.desc2 = datas[rand].desc2;
+            upgradeDatas.Add(ud);
+            datas.RemoveAt(rand);
+        }
+
+        for (int i = 0; i < upgradeDatas.Count; i++)
+        {
+            upUI[i].icon.sprite = upgradeDatas[i].sprite;
+            upUI[i].title.text = upgradeDatas[i].title;
+            upUI[i].desc1.text = upgradeDatas[i].desc1;
+            upUI[i].desc2.text = upgradeDatas[i].desc2;
+        }
+    }
+
+    public void OnUpgrade(int index)    //업그레이드
+    {
+        Debug.Log(upgradeDatas[index].sprite.name);
+        switch(upgradeDatas[index].sprite.name)
+        {
+            case "Select 0":
+                p.AddShild();   //삽 추가
+                break;
+            case "Select 3":
+                p.BulletHitMaxCount++;  //총알 데미지 증가
+                break;
+            case "Select 6":
+                p.BulletFireDelayTime -= p.BulletFireDelayTime * 0.1f;  //총알 속도 증가
+                break;
+            case "Select 7":
+                p.Speed += 2f;  //플레이어 속도 증가
+                break;
+            case "Select 8":
+                p.HP = p.MaxHP; //최대 HP 증가
+                SetHP(p.HP, p.MaxHP);
+                break;
+        }
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy2 : Monster
 {
-    // Start is called before the first frame update
     void Start()
     {
         atkTime = 2f;

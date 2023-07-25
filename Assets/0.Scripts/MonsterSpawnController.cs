@@ -6,44 +6,51 @@ public class MonsterSpawnController : MonoBehaviour
 {
     [SerializeField] private Player p;
 
-    [SerializeField] private Monster monster;
+    [SerializeField] private Monster[] monsters;
     [SerializeField] private Transform parent;
 
     [SerializeField] private BoxCollider2D[] boxColls;
+
 
     float spawnTimer;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("CreateMonster", 1, 1);   //호출할 함수 이름, 첫 호출 시간, 반복 호출 간격
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Ui.instance.gamestate != GameState.play)
+        if (UI.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
-        if(spawnTimer > 3)
+        spawnTimer += Time.deltaTime;
+        if (spawnTimer > 0.2f)    //spawnTimer가 0.2f 이상이라면
         {
             spawnTimer = 0;
-            CreateMonster();
+            CrateMonster();    //함수 실행
         }
     }
 
-    void CreateMonster()
+    void CrateMonster()
     {
         int rand = Random.Range(0, boxColls.Length);
         Vector2 v = RandomPosition(boxColls[rand]);    //랜덤 위치
 
-        int randSpawnCoubt = 0;
-        if (monster)
+        int randSpawnCount = 0;
+        if( monsters.Length > (UI.instance.KillCount / 10))    //몬스터의 수가 (죽은 몬스터 나누 10)보다 크다면
         {
-
+            randSpawnCount = (UI.instance.KillCount / 10);
         }
-        Monster m = Instantiate(monster, v, Quaternion.identity);
-        m.SetPlayer(p);
-        m.transform.SetParent(parent);
+        else
+        {
+            randSpawnCount = monsters.Length;   //randSpawnCount는 몬스터의 수
+        }
+
+        int mRand = Random.Range(0, randSpawnCount);
+        Monster m = Instantiate(monsters[mRand], v, Quaternion.identity);   //몬스터 mRand을 v에 회전하지 않는 상태도 생성
+        m.SetPlayer(p);    //Monster Player 지정
+        m.transform.SetParent(parent);     //Monster parget 지정
     }
 
     Vector2 RandomPosition(BoxCollider2D boxColl)

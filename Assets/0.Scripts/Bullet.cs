@@ -4,32 +4,23 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
-    public int HitCount
-    {
-        get; set;
-    }
-
-    public int HitMaxCount
-    {
-        get; set;
-    }
+    public int HitCount { get; set; }
+    public int HitMaxCount { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
         HitCount = 0;
-        HitMaxCount = 1;
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 2f);    //2초 후에 삭제
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Ui.instance.gamestate != GameState.play)
+        if (UI.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
-        transform.Translate(Vector3.right * Time.deltaTime * 15f);  //오른쪽으로 회전
+        transform.Translate(Vector3.right * Time.deltaTime * 15f);    //오른쪽으로 회전
     }
 
     public void SetHitMaxCount(int count)

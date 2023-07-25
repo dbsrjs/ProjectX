@@ -17,22 +17,21 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioSource audioSource;
 
-    public void Awake()
+    private void Awake()
     {
         instance = this;
     }
-
+   
     public void Play(string name)
     {
         foreach (var item in myClips)
         {
-            if (item.name == name)
+            if(item.name == name)
             {
                 audioSource.clip = item.audioClip;
-
+                audioSource.Play();
                 break;
             }
         }
-                
     }
 }
