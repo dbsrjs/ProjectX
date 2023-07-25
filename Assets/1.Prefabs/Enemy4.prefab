@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8312409148989826995}
-  - component: {fileID: 3101154293031112312}
+  - component: {fileID: 5312324533996741760}
   - component: {fileID: 3917484246741524156}
   - component: {fileID: 8312409148989827004}
   - component: {fileID: 8568933515256685128}
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3101154293031112312
+--- !u!114 &5312324533996741760
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,15 +45,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8312409148989827005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed52ebd3feba280438e673868f0a6879, type: 3}
+  m_Script: {fileID: 11500000, guid: 92e0c576fcf9f7548aec41eab7fff253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 8312409148989827004}
   animator: {fileID: 3917484246741524156}
-  expPrefab:
-  - {fileID: 9093270398808336468, guid: 919e3f6f4e5f2554f9404977656cc6c1, type: 3}
-  - {fileID: 9093270398808336468, guid: 1dc93883b10c27a47b0add5ce5524883, type: 3}
-  - {fileID: 9093270398808336468, guid: 9e2d147fafe8e1347ba8d57b2f595104, type: 3}
+  expPrefab: []
 --- !u!95 &3917484246741524156
 Animator:
   serializedVersion: 5

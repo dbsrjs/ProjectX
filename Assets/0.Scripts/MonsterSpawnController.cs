@@ -36,6 +36,11 @@ public class MonsterSpawnController : MonoBehaviour
         int rand = Random.Range(0, boxColls.Length);
         Vector2 v = RandomPosition(boxColls[rand]);    //·£´ý À§Ä¡
 
+        int randSpawnCoubt = 0;
+        if (monster)
+        {
+
+        }
         Monster m = Instantiate(monster, v, Quaternion.identity);
         m.SetPlayer(p);
         m.transform.SetParent(parent);
