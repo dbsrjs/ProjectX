@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
 {
     private Player p;
+    private Boom boom;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject[] expPrefab;
@@ -18,6 +19,12 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
     private float hitFrezeTimer;    //일시 정지
 
     // Update is called once per frame
+
+    private void Start()
+    {
+        boom.GetComponent<Boom>().target = transform;
+    }
+
     void Update()
     {
         if (UI.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
@@ -83,7 +90,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
         }
     }
 
-    void Dead(float frezeTime, int damage)
+    public void Dead(float frezeTime, int damage)
     {
         hitFrezeTimer = frezeTime;  //hitFrezeTimer 값 지정
         hp -= damage;   //데미지에 비례해서 hp 감소

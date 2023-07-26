@@ -30,7 +30,7 @@ public class UpgradeUI
     public TMP_Text desc2;
 }
 
-// 아이템 : 삽, 엽총 음료수(피회복), 전투장화, 전투장갑
+// 아이템 : 삽, 엽총, 음료수(피회복), 전투장화, 전투장갑
 public class UI : MonoBehaviour
 {
     public static UI instance;
@@ -71,9 +71,9 @@ public class UI : MonoBehaviour
             gamestate = GameState.Pause;    //게임 일시 정지
             levelupPopup.gameObject.SetActive(true);
             Level = (++level) + 1;  //레벨 증가
-            maxExp += 150;
-            sliderExp.value = 0f;
-            exp = 0;
+            maxExp += 150;  //maxExp 증가
+            sliderExp.value = 0f;   //레벨 바 초기화
+            exp = 0;    //경험치 초기화
         }
     }
 
@@ -91,7 +91,7 @@ public class UI : MonoBehaviour
     {
         set
         {
-            txtLv.text = $"Lv.{value}";    //Level  이미지 변경
+            txtLv.text = $"Lv.{value}";    //Level 이미지 변경
         }
     }
 
@@ -102,7 +102,7 @@ public class UI : MonoBehaviour
 
     void Start()
     {
-        OnGameStart();
+        OnGameStart();  //게임 시작
         sliderExp.value = 0f;
         
         for (int i = 0; i < boxColls.Length; i++)   // 몬스터 스폰 오브젝트 위치 고정
@@ -125,7 +125,7 @@ public class UI : MonoBehaviour
             gamestate = GameState.Play; //게임 재개
         }
 
-        if (gamestate != GameState.Play)
+        if (gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
         timer += Time.deltaTime;

@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform firePos;
     [SerializeField] private Bullet bullet;
 
+    [SerializeField] private Transform boom;
+
     private List<Transform> shields = new List<Transform>();
 
     float bulletTimer;
@@ -55,7 +57,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (UI.instance.gamestate != GameState.Play)
+        if (UI.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
         x = Input.GetAxis("Horizontal");    //플레이어 이동(A, D)
@@ -113,6 +115,11 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1))
         {
             BulletHitMaxCount++;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Instantiate(boom, transform.position, transform.rotation);            
         }
     }
 
