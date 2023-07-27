@@ -21212,24 +21212,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upData:
   - sprite: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-    title: "\uC274\uB4DC \uAC1C\uC218 \uC99D\uAC00"
-    desc1: 0
-    desc2: 
+    title: "\uC0BD"
+    desc1: "\uBCF4\uD638\uC0BD \uAC2F\uC218 +1 \uC99D\uAC00"
+    desc2: "\uBAB8 \uC8FC\uC704\uC5D0 \uBCF4\uD638"
   - sprite: {fileID: -205726582, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-    title: "\uCD1D\uC54C \uB370\uBBF8\uC9C0 \uC99D\uAC00"
-    desc1: 1
-    desc2: 
-  - sprite: {fileID: -205726582, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-    title: "\uCD1D\uC54C \uC18D\uB3C4 \uC99D\uAC00"
-    desc1: 2
-    desc2: 
+    title: "\uCD1D"
+    desc1: "\uBC1C\uC0AC\uCCB4 +1 \uC99D\uAC00"
+    desc2: "\uB370\uBBF8\uC9C0\uAC00 \uB192\uC740 \uCD1D\uC54C \uBC1C\uC0AC"
+  - sprite: {fileID: -201829820, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+    title: "\uC804\uD22C\uC7A5\uAC11"
+    desc1: "\uD328\uC2DC\uBE0C"
+    desc2: "\uACF5\uACA9 \uC18D\uB3C4 \uC99D\uAC00"
   - sprite: {fileID: -966295699, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-    title: "\uD50C\uB808\uC774\uC5B4 \uC18D\uB3C4 \uC99D\uAC00"
-    desc1: 3
-    desc2: 
+    title: "\uC804\uD22C \uC7A5\uD654"
+    desc1: "\uD328\uC2DC\uBE0C"
+    desc2: "\uC774\uB3D9 \uC18D\uB3C4 \uC99D\uAC00"
   - sprite: {fileID: 927338625, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-    title: "\uCD5C\uB300 HP \uC99D\uAC00"
-    desc1: 4
+    title: "\uC5D0\uB108\uC9C0 \uB4DC\uB9C1\uD06C"
+    desc1: "\uD53C \uD68C\uBCF5"
     desc2: 
   upUI:
   - icon: {fileID: 2088687782}
@@ -21260,7 +21260,7 @@ MonoBehaviour:
   txtTime: {fileID: 1444771727}
   txtKillCount: {fileID: 1576405739}
   txtLv: {fileID: 1717994860}
-  hpImg: {fileID: 749420328}
+  hpImg: {fileID: 631012315}
 --- !u!1 &1381990333
 GameObject:
   m_ObjectHideFlags: 0
@@ -22968,7 +22968,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1702427839
 MonoBehaviour:
