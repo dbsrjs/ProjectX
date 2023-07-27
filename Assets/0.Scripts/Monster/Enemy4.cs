@@ -7,7 +7,7 @@ public class Enemy4 : Monster
     void Start()
     {
         atkTime = 2f;
-        power = 10;
-        hp = 100;
+        power = 40;
+        hp = 140;
     }
 }

@@ -1,11 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Boom : MonoBehaviour
 {
-    public Transform target;    //Monster
-    private Monster monster;
     private float time;
 
     // Update is called once per frame
@@ -14,16 +12,12 @@ public class Boom : MonoBehaviour
         time += Time.deltaTime;
     }
 
-    public void OnTriggerStay2D(Collider2D collision)
+    public IEnumerator OnTriggerStay2D(Collider2D collision)
     {
-        if (time >= 1f)
-        {
-            foreach (Transform child in transform)    //�ȵ�
-            {
-                Debug.Log("test");
-                Destroy(child.gameObject);
-                Destroy(gameObject);
-            }
-        }
+        yield return new WaitForSeconds(3f);    //3초 후
+        Monster monster = GameObject.FindObjectOfType<Monster>();   //Monster 스크렙트를 갖고 있는 gameObject 찾기
+        monster.Dead(0f, 200);    //Dead 함수 호출(킬은 올라 가지만 실질적으론 한마리만 죽음)
+        Debug.Log("test");
+        Destroy(gameObject);
     }
 }

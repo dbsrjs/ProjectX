@@ -11,14 +11,8 @@ public class MonsterSpawnController : MonoBehaviour
 
     [SerializeField] private BoxCollider2D[] boxColls;
 
-
     float spawnTimer;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
-    // Update is called once per frame
     void Update()
     {
         if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면

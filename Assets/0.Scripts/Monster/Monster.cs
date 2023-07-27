@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
 {
     private Player p;
-    private Boom boom;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject[] expPrefab;
@@ -20,10 +19,6 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
 
     // Update is called once per frame
 
-    private void Start()
-    {
-        boom.GetComponent<Boom>().target = transform;
-    }
 
     void Update()
     {
@@ -76,7 +71,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
     {
         if(collision.GetComponent<Shild>())   //Shield(삽)과 충돌
         {
-            Dead(0.2f, 30);
+            Dead(0.2f, 0); //0.2f, 30
         }
         else if(collision.GetComponent<Bullet>())    //총알과 충돌
         {
@@ -85,7 +80,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
             {
                 Destroy(collision.gameObject);     //Bullet 삭제
             }
-            Dead(0.5f, 20);
+            Dead(0.5f, 0);  //0.5f, 20
         }
     }
 

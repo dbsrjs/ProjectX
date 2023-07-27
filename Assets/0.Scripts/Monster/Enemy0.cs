@@ -8,6 +8,6 @@ public class Enemy0 : Monster
     {
         atkTime = 2f;
         power = 10;
-        hp = 100;
+        hp = 60;
     }
 }
