@@ -21,7 +21,7 @@ public class MonsterSpawnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (UI.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
+        if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
         spawnTimer += Time.deltaTime;
@@ -38,9 +38,9 @@ public class MonsterSpawnController : MonoBehaviour
         Vector2 v = RandomPosition(boxColls[rand]);    //랜덤 위치
 
         int randSpawnCount = 0;
-        if( monsters.Length > (UI.instance.KillCount / 10))    //몬스터의 수가 (죽은 몬스터 나누 10)보다 크다면
+        if( monsters.Length > (Ui.instance.KillCount / 10))    //몬스터의 수가 (죽은 몬스터 나누 10)보다 크다면
         {
-            randSpawnCount = (UI.instance.KillCount / 10);
+            randSpawnCount = (Ui.instance.KillCount / 10);
         }
         else
         {

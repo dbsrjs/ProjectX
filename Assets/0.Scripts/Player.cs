@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         set
         {
             exp = value;
-            UI.instance.SetExp(ref exp, ref maxExp, ref level);
+            Ui.instance.SetExp(ref exp, ref maxExp, ref level);
         }
     }
 
@@ -51,13 +51,13 @@ public class Player : MonoBehaviour
         maxExp = 100;
 
         level = 0;
-        UI.instance.Level = level + 1;
+        Ui.instance.Level = level + 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (UI.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
+        if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
         x = Input.GetAxis("Horizontal");    //플레이어 이동(A, D)
@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
             BulletHitMaxCount++;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))    //폭탄 설치
         {
             Instantiate(boom, transform.position, transform.rotation);            
         }
@@ -125,8 +125,8 @@ public class Player : MonoBehaviour
 
     public void Hit(int damage)    //damage = power(Monster) = 10;
     {
-        HP -= damage;   //데미지 감소
-        UI.instance.SetHP(HP, MaxHP);
+        HP -= damage;   //HP 감소
+        Ui.instance.SetHP(HP, MaxHP);
     }
 
     public void Shield()

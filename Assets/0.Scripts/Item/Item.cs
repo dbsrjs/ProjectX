@@ -19,7 +19,7 @@ public abstract class Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (UI.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
+        if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
         if (isPickup)

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6884714529189577916}
-  - component: {fileID: 5440258578968059909}
+  - component: {fileID: 5448638795763812365}
   - component: {fileID: 4560104431705016044}
   - component: {fileID: 7935534411554748319}
   - component: {fileID: 678679349559211681}
@@ -34,9 +34,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5440258578968059909
+--- !u!114 &5448638795763812365
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,12 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3c947983a651e4eaeb2bd3afa5077d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sr: {fileID: 4560104431705016044}
-  animator: {fileID: 7935534411554748319}
-  expPrefab:
-  - {fileID: 6114156052473066940, guid: 4e6fee4fe0012264b8e8657e04976ced, type: 3}
-  - {fileID: 6114156052473066940, guid: bc2a680727ee107459287976d886da1b, type: 3}
-  - {fileID: 6114156052473066940, guid: 15c106b52ebb7b941b909887e4aa1f1c, type: 3}
+  sr: {fileID: 0}
+  animator: {fileID: 0}
+  expPrefab: []
 --- !u!212 &4560104431705016044
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -144,12 +141,6 @@ Rigidbody2D:
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -164,25 +155,6 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

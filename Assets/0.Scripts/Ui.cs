@@ -31,9 +31,9 @@ public class UpgradeUI
 }
 
 // 아이템 : 삽, 엽총, 음료수(피회복), 전투장화, 전투장갑
-public class UI : MonoBehaviour
+public class Ui : MonoBehaviour
 {
-    public static UI instance;
+    public static Ui instance;
 
     [SerializeField] private UpgradeData[] upData;
     [SerializeField] private UpgradeUI[] upUI;

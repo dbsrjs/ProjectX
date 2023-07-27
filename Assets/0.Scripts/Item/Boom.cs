@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class Boom : MonoBehaviour
 {
-    public Transform target;
+    public Transform target;    //Monster
     private Monster monster;
+    private float time;
+
     // Update is called once per frame
     void Update()
     {
-        
+        time += Time.deltaTime;
     }
-    
 
-    IEnumerator Bomb()
+    public void OnTriggerStay2D(Collider2D collision)
     {
-        float distance = Vector3.Distance(transform.position, target.position);    //둘 사이의 거리 계산
-        yield return new WaitForSeconds(3f);
-
-        if (distance <= 3f)
+        if (time >= 1f)
         {
-            monster.GetComponent<Monster>().Dead(0.5f, 500);
+            foreach (Transform child in transform)    //안됨
+            {
+                Debug.Log("test");
+                Destroy(child.gameObject);
+                Destroy(gameObject);
+            }
         }
-        Destroy(transform);
     }
 }

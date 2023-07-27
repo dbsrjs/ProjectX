@@ -260,8 +260,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+      - m_Target: {fileID: 1264535908}
+        m_TargetAssemblyTypeName: Ui, Assembly-CSharp
         m_MethodName: OnGameStart
         m_Mode: 1
         m_Arguments:
@@ -272,8 +272,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+      - m_Target: {fileID: 1264535908}
+        m_TargetAssemblyTypeName: Ui, Assembly-CSharp
         m_MethodName: OnUpgrade
         m_Mode: 3
         m_Arguments:
@@ -472,7 +472,7 @@ GameObject:
   - component: {fileID: 103261616}
   - component: {fileID: 103261615}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Desc 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1050,7 +1050,7 @@ GameObject:
   - component: {fileID: 176350112}
   - component: {fileID: 176350111}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Desc 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1185,7 +1185,7 @@ GameObject:
   - component: {fileID: 184058530}
   - component: {fileID: 184058529}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1472,7 +1472,7 @@ GameObject:
   - component: {fileID: 254333196}
   - component: {fileID: 254333195}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Desc 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6243,7 +6243,7 @@ GameObject:
   - component: {fileID: 523195525}
   - component: {fileID: 523195524}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Desc 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7090,7 +7090,7 @@ GameObject:
   - component: {fileID: 686151750}
   - component: {fileID: 686151749}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Desc 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7225,7 +7225,7 @@ GameObject:
   - component: {fileID: 697798579}
   - component: {fileID: 697798578}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Lv text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12207,7 +12207,7 @@ GameObject:
   - component: {fileID: 980442007}
   - component: {fileID: 980442006}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16696,8 +16696,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+      - m_Target: {fileID: 1264535908}
+        m_TargetAssemblyTypeName: Ui, Assembly-CSharp
         m_MethodName: OnGameStart
         m_Mode: 1
         m_Arguments:
@@ -16708,8 +16708,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+      - m_Target: {fileID: 1264535908}
+        m_TargetAssemblyTypeName: Ui, Assembly-CSharp
         m_MethodName: OnUpgrade
         m_Mode: 3
         m_Arguments:
@@ -20990,7 +20990,7 @@ GameObject:
   - component: {fileID: 1205898924}
   - component: {fileID: 1205898923}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21213,23 +21213,23 @@ MonoBehaviour:
   upData:
   - sprite: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
     title: "\uC0BD"
-    desc1: "\uBCF4\uD638\uC0BD \uAC2F\uC218 +1 \uC99D\uAC00"
+    desc1: "\uBCF4\uD638\uC0BD \uAC2F\uC218 +1"
     desc2: "\uBAB8 \uC8FC\uC704\uC5D0 \uBCF4\uD638"
   - sprite: {fileID: -205726582, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
     title: "\uCD1D"
-    desc1: "\uBC1C\uC0AC\uCCB4 +1 \uC99D\uAC00"
+    desc1: "\uBC1C\uC0AC\uCCB4 +1"
     desc2: "\uB370\uBBF8\uC9C0\uAC00 \uB192\uC740 \uCD1D\uC54C \uBC1C\uC0AC"
   - sprite: {fileID: -201829820, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-    title: "\uC804\uD22C\uC7A5\uAC11"
+    title: "\uC804\uD22C \uC7A5\uAC11"
     desc1: "\uD328\uC2DC\uBE0C"
     desc2: "\uACF5\uACA9 \uC18D\uB3C4 \uC99D\uAC00"
   - sprite: {fileID: -966295699, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
     title: "\uC804\uD22C \uC7A5\uD654"
-    desc1: "\uD328\uC2DC\uBE0C"
+    desc1: "\uD328\uC2DC\uB4DC"
     desc2: "\uC774\uB3D9 \uC18D\uB3C4 \uC99D\uAC00"
   - sprite: {fileID: 927338625, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
     title: "\uC5D0\uB108\uC9C0 \uB4DC\uB9C1\uD06C"
-    desc1: "\uD53C \uD68C\uBCF5"
+    desc1: "\uD53C\uD68C\uBCF5 100%"
     desc2: 
   upUI:
   - icon: {fileID: 2088687782}
@@ -21660,7 +21660,7 @@ GameObject:
   - component: {fileID: 1457106433}
   - component: {fileID: 1457106432}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: Desc 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22364,7 +22364,7 @@ GameObject:
   - component: {fileID: 1552531933}
   - component: {fileID: 1552531932}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22626,7 +22626,7 @@ GameObject:
   - component: {fileID: 1627304725}
   - component: {fileID: 1627304724}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22911,7 +22911,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 65.7, y: -7.9000244}
+  m_AnchoredPosition: {x: 65.7, y: -6.9000244}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1702427838
@@ -22968,7 +22968,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1702427839
 MonoBehaviour:
@@ -23107,8 +23107,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+      - m_Target: {fileID: 1264535908}
+        m_TargetAssemblyTypeName: Ui, Assembly-CSharp
         m_MethodName: OnGameStart
         m_Mode: 1
         m_Arguments:
@@ -23119,8 +23119,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+      - m_Target: {fileID: 1264535908}
+        m_TargetAssemblyTypeName: Ui, Assembly-CSharp
         m_MethodName: OnUpgrade
         m_Mode: 3
         m_Arguments:
@@ -23261,7 +23261,7 @@ GameObject:
   - component: {fileID: 1731730016}
   - component: {fileID: 1731730015}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Lvtext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23747,7 +23747,7 @@ GameObject:
   - component: {fileID: 1849360941}
   - component: {fileID: 1849360940}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Lv Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24344,7 +24344,7 @@ GameObject:
   - component: {fileID: 2088687783}
   - component: {fileID: 2088687782}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

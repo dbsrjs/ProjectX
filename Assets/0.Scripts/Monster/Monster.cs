@@ -27,7 +27,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
 
     void Update()
     {
-        if (UI.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
+        if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
         if (p == null || hp <= 0)   //플레이어가 없거나 죽었을 때
@@ -49,7 +49,6 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
         sr.flipX = x < 0 ? true : x == 0 ? true : false;    //타겟(플레이어) 위치에 따라 보는 방향 변경, 삼항식
 
         float distance = Vector2.Distance(p.transform.position, transform.position);    //둘 사이의 거리 계산
-        
         if (distance <= 1)  //거리가 1 이하라면 
         {
             atkTimer += Time.deltaTime;
@@ -108,7 +107,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
 
     IEnumerator CDropExp()
     {
-        UI.instance.KillCount++;    //KillCount Text 증가
+        Ui.instance.KillCount++;    //KillCount Text 증가
         yield return new WaitForSeconds(1f);    //1초 후
         // 경험치 아이템 드랍률
         // TODO : 가중치 랜덤 확률로 변경 해야함...

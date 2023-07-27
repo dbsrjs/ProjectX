@@ -41,12 +41,12 @@ public class Option : MonoBehaviour
 
     public void OnEnable()     // 게임 오브젝트가 켜질때 작동
     {
-        UI.instance.gamestate = GameState.Pause;
+        Ui.instance.gamestate = GameState.Pause;
     }
     
     public void OnDisable()    // 게임 오브젝트가 꺼질때 작동
     {
-        UI.instance.gamestate = GameState.Play;
+        Ui.instance.gamestate = GameState.Play;
     }
 
     public void OnBGMValueChange(Slider slider)    //배경음 설정
