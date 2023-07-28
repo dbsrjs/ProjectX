@@ -9,8 +9,6 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject[] expPrefab;
 
-    public GameObject boom;
-
     protected float atkTime;    //공격 속도
     protected int power;    //공격력
     protected int hp;   //채력
@@ -24,6 +22,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
 
     void Update()
     {
+
         if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
@@ -73,7 +72,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
     {
         if(collision.GetComponent<Shild>())   //Shield(삽)과 충돌
         {
-            Dead(0.2f, 0); //0.2f, 30
+            Dead(0.2f, 30); //0.2f, 30
         }
         else if(collision.GetComponent<Bullet>())    //총알과 충돌
         {
@@ -82,19 +81,17 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
             {
                 Destroy(collision.gameObject);     //Bullet 삭제
             }
-            Dead(0.5f, 0);  //0.5f, 20
+            Dead(0.5f, 20);  //0.5f, 20
         }
 
         else if (collision.GetComponent<Boom>())    //폭탄과 충돌
         {
-            yield return new WaitForSeconds(3f);    //3초 후
-
-            //collision.GetComponent<CapsuleCollider2D>().enabled = false;  //CapsuleCollider2D OFF
-            //Destroy(collision.GetComponent<Rigidbody2D>());   //Rigidbody2D 삭제
-            //Destroy(collision.GetComponent<SpriteRenderer>());   //Rigidbody2D 삭제
-
-            Destroy(collision.gameObject);
-            Dead(0f, 200);  //0f, 200
+            yield return new WaitForSeconds(3f);
+            if (collision != null)
+            {
+                Destroy(collision.gameObject);
+                Dead(0f, 200);  //0f, 200
+            }
         }
     }
 
