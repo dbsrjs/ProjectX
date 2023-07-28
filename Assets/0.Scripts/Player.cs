@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))    //ÆøÅº ¼³Ä¡
         {
-            Instantiate(boom, transform.position, transform.rotation);            
+            Instantiate(boom, transform.position, transform.rotation);
         }
     }
 

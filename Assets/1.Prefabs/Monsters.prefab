@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6884714529189577916}
-  - component: {fileID: 5448638795763812365}
+  - component: {fileID: -2206419379854662911}
   - component: {fileID: 4560104431705016044}
   - component: {fileID: 7935534411554748319}
   - component: {fileID: 678679349559211681}
   - component: {fileID: 7189056408949232223}
   m_Layer: 6
-  m_Name: Monster
+  m_Name: Monsters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5448638795763812365
+--- !u!114 &-2206419379854662911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,12 +45,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3593258065730223603}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d3c947983a651e4eaeb2bd3afa5077d, type: 3}
+  m_Script: {fileID: 11500000, guid: d899f1244e1a493438d6f9c12303d77d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sr: {fileID: 0}
-  animator: {fileID: 0}
-  expPrefab: []
+  sr: {fileID: 4560104431705016044}
+  animator: {fileID: 7935534411554748319}
+  expPrefab:
+  - {fileID: 6114156052473066940, guid: 4e6fee4fe0012264b8e8657e04976ced, type: 3}
+  - {fileID: 6114156052473066940, guid: bc2a680727ee107459287976d886da1b, type: 3}
+  - {fileID: 6114156052473066940, guid: 15c106b52ebb7b941b909887e4aa1f1c, type: 3}
+  boom: {fileID: 8815176515627073475, guid: 3f5d97e6affdcdc489f3fdb122a9b674, type: 3}
 --- !u!212 &4560104431705016044
 SpriteRenderer:
   m_ObjectHideFlags: 0
