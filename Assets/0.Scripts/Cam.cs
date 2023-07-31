@@ -9,11 +9,19 @@ public class Cam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(target != null)     //target가 없지 않을 때
+        if (target != null)     //target이 없지 않을 때
         {
             Vector3 v1 = target.position;
             v1.z = -10f;
-            transform.position = Vector3.Lerp(transform.position, v1, Time.deltaTime * 10f);
+            transform.position = Vector3.Lerp(transform.position, v1, Time.deltaTime * 50f);
+        }
+
+        else
+        {
+            if(GameManager.Insatnce != null)
+            {
+                target = GameManager.Insatnce.p.transform;
+            }
         }
     }
 }

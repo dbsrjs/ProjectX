@@ -60,17 +60,22 @@ public class Ui : MonoBehaviour
     private List<UpgradeData> upgradeDatas = new List<UpgradeData>();
 
 
-    public void SetExp(ref float exp, ref float maxExp, ref int level)  //레벨
+    public void SetExp(ref float exp, ref float maxExp, ref int level)  //Level
     {
         sliderExp.value = exp / maxExp;
 
-        if (exp >= maxExp)
+        if (exp >= maxExp)  //Level Up
         {
             AudioManager.instance.Play("levelup");
             SetUpgradeData();
             gamestate = GameState.Pause;    //게임 일시 정지
-            levelupPopup.gameObject.SetActive(true);
+            levelupPopup.gameObject.SetActive(true);    //LevelUp 창 표시
             Level = (++level) + 1;  //레벨 증가
+            if (GameManager.Insatnce.playerIndex == 0)
+                Debug.Log("test");
+            //p.BulletHitMaxCount++;
+            else
+                p.BulletFireDelayTime -= p.BulletFireDelayTime * 0.2f;
             maxExp += 150;  //maxExp 증가
             sliderExp.value = 0f;   //레벨 바 초기화
             exp = 0;    //경험치 초기화
@@ -120,6 +125,11 @@ public class Ui : MonoBehaviour
 
     void Update()
     {
+        if(p == null && GameManager.Insatnce != null)
+        {
+            p = GameManager.Insatnce.p;
+        }
+        
         if (Input.GetKeyDown(KeyCode.F5))
         {
             gamestate = GameState.Play; //게임 재개
@@ -133,7 +143,7 @@ public class Ui : MonoBehaviour
         txtTime.text = string.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);     //타이머 텍스트
     }
     
-    public void SetHP(int HP, int maxHP)
+    public void SetHP(int HP, int maxHP)    //현재 HP 계산
     {
         hpImg.fillAmount = (float)HP / maxHP;
     }    
@@ -187,10 +197,10 @@ public class Ui : MonoBehaviour
                 p.AddShild();   //삽 추가
                 break;
             case "Select 3":
-                p.BulletHitMaxCount++;  //총알 데미지 증가
+                p.BulletHitMaxCount++;  //총알 관통 횟수 증가
                 break;
             case "Select 6":
-                p.BulletFireDelayTime -= p.BulletFireDelayTime * 0.1f;  //총알 속도 증가
+                p.BulletFireDelayTime -= p.BulletFireDelayTime * 0.1f;  //총알 연사속도 증가
                 break;
             case "Select 7":
                 p.Speed += 2f;  //플레이어 속도 증가

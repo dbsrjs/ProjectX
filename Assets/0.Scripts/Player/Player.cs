@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public abstract class Player : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
-    [SerializeField] private SpriteRenderer sr;
 
     [SerializeField] private Transform shildPrefab;
     [SerializeField] private Transform shieldParent;
@@ -13,21 +11,25 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform firePos;
     [SerializeField] private Bullet bullet;
 
+    protected Animator animator;
+    protected SpriteRenderer sr;
+
     [SerializeField] private Transform boom;
 
     private List<Transform> shields = new List<Transform>();
 
-    float bulletTimer;
+    private float x, y;
+    private int shieldCount;    //삽 갯수
 
-    int shieldCount, shieldSpeed, level;
-    float x, y, exp, maxExp;
+    protected int  shieldSpeed, level;  //삽 속도, 플레이어 레벨
+    protected float exp, maxExp, bulletTimer;   //현재 경험치, 최대 경험지, ??
 
-    public int HP { get; set; }
-    public int MaxHP { get; set; }
-    public float Speed { get; set; }
-    public int BulletHitMaxCount { get; set; }
+    public int HP { get; set; } //현재 HP
+    public int MaxHP { get; set; }  //최대 HP
+    public float Speed { get; set; }    //플레이어 속도
+    public int BulletHitMaxCount { get; set; }  //총알 관통 횟수
 
-    public float BulletFireDelayTime { get; set; }
+    public float BulletFireDelayTime { get; set; }  //총알 연사 속도  ??
     public float Exp
     {
         get { return exp; }
@@ -36,22 +38,6 @@ public class Player : MonoBehaviour
             exp = value;
             Ui.instance.SetExp(ref exp, ref maxExp, ref level);
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Speed = 3f; 
-        BulletFireDelayTime = 0.2f;
-
-        HP = MaxHP = 100;
-        shieldSpeed = 50;
-
-        exp = 0;
-        maxExp = 100;
-
-        level = 0;
-        Ui.instance.Level = level + 1;
     }
 
     // Update is called once per frame

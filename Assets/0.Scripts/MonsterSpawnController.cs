@@ -18,6 +18,11 @@ public class MonsterSpawnController : MonoBehaviour
         if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
+        if (p == null && GameManager.Insatnce != null)
+        {
+            p = GameManager.Insatnce.p;
+        }
+
         spawnTimer += Time.deltaTime;
         if (spawnTimer > 0.2f)    //spawnTimer가 0.2f 이상이라면
         {

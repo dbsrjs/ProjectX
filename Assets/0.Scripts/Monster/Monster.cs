@@ -26,6 +26,11 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
         if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
+        if (p == null && GameManager.Insatnce != null)
+        {
+            p = GameManager.Insatnce.p;
+        }
+
         if (p == null || hp <= 0)   //플레이어가 없거나 죽었을 때
             return;
 
