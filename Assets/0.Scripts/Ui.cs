@@ -35,17 +35,18 @@ public class Ui : MonoBehaviour
 {
     public static Ui instance;
 
-    [SerializeField] private UpgradeData[] upData;
-    [SerializeField] private UpgradeUI[] upUI;
-
     [HideInInspector] public GameState gamestate = GameState.Stop;
 
-    [SerializeField] private Player p;
+    [SerializeField] private UpgradeData[] upData;
+    [SerializeField] private UpgradeUI[] upUI;
+    [SerializeField] private DeadPopup deadPopup;
+
+
 
     [SerializeField] private RectTransform canvas;
     [SerializeField] private Transform levelupPopup;
-    // 0 À§ 1 ¾Æ·¡ 2 ¿Þ 3 ¿À
-    [SerializeField] private BoxCollider2D[] boxColls;
+    
+    [SerializeField] private BoxCollider2D[] boxColls;  // 0 À§ 1 ¾Æ·¡ 2 ¿Þ 3 ¿À
 
     [SerializeField] private Slider sliderExp;
     [SerializeField] private Text txtTime;
@@ -54,10 +55,10 @@ public class Ui : MonoBehaviour
     [SerializeField] private Image hpImg;
 
     private float timer = 0;
-
     private int killCount = 0;
 
     private List<UpgradeData> upgradeDatas = new List<UpgradeData>();
+    private Player p;
 
 
     public void SetExp(ref float exp, ref float maxExp, ref int level)  //Level
@@ -210,5 +211,13 @@ public class Ui : MonoBehaviour
                 SetHP(p.HP, p.MaxHP);
                 break;
         }
+    }
+
+    public void ShowDeadPopup(int level)
+    {
+        deadPopup.gameObject.SetActive(true);
+
+        System.TimeSpan ts = System.TimeSpan.FromSeconds(timer);
+        deadPopup.SetUi(killCount, level, ts);
     }
 }

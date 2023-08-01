@@ -111,8 +111,24 @@ public abstract class Player : MonoBehaviour
 
     public void Hit(int damage)    //damage = power(Monster) = 10;
     {
+        if (Ui.instance.gamestate != GameState.Play)
+            return;
+
         HP -= damage;   //HP 감소
         Ui.instance.SetHP(HP, MaxHP);
+
+        if (HP <= 0)    //죽었을 때
+        {
+            Ui.instance.ShowDeadPopup(level + 1);
+            animator.SetTrigger("dead");
+
+            Invoke("Dead", 2f);
+        }
+    }
+
+    void Dead()
+    {
+        Ui.instance.ShowDeadPopup(level + 1);
     }
 
     public void Shield()
