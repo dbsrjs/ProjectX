@@ -7,11 +7,12 @@ public abstract class Item : MonoBehaviour
     public enum Type
     {
         Exp,
-        Mag
+        Mag,
+        Health
     }
 
     public bool isPickup = false;
-    public Transform target;    //target = player
+    public Player p;
 
     protected Type type = Type.Exp;
     protected float exp = 10;
@@ -22,16 +23,51 @@ public abstract class Item : MonoBehaviour
         if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
-        if (isPickup)
+        if (p == null)
         {
-            float distance = Vector3.Distance(transform.position, target.position);    //둘 사이의 거리 계산
-            transform.position = Vector3.Lerp(transform.position, target.position, (Time.deltaTime * distance) * 4f);    //target이 첫번째 포디션으로 이동
-
-            if(distance < 1f)
-            {
-                target.GetComponent<Player>().Exp += exp;   //경험치 증가
-                Destroy(gameObject);    //UI 삭제
-            }
+            p = GameManager.Insatnce.p;
         }
+
+        float distance = Vector3.Distance(transform.position, p.transform.position);    //둘 사이의 거리 계산
+        Vector3 vec = Vector3.zero;
+        transform.position = Vector3.SmoothDamp(transform.position, p.transform.position, ref vec, Time.deltaTime * 10f);    //target이 첫번째 포디션으로 이동
+        switch (type)
+        {
+            case Type.Exp:
+                Exp(distance);
+                break;
+            case Type.Health:
+                Health();
+                break;
+            case Type.Mag:
+                Magnet();
+                break;
+        }
+    }
+
+    void Exp(float distance)
+    {
+        if (distance < 1f)
+        {
+            p.Exp += exp;
+            Destroy(gameObject);    //UI 삭제
+        }
+    }
+
+    void Health()
+    {
+        p.HP = p.MaxHP;
+        p.Hit(0);
+        Destroy(gameObject);
+    }
+
+    void Magnet()
+    {
+        Item[] items = FindObjectsOfType<Item>();
+        foreach (var item in items)
+        {
+           item.isPickup = true;
+        }
+        Destroy(gameObject);
     }
 }

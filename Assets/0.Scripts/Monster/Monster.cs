@@ -11,7 +11,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
 
     protected float atkTime;    //공격 속도
     protected int power;    //공격력
-    protected int hp;   //채력
+    [HideInInspector] public int hp;   //채력
 
     private float atkTimer;
 

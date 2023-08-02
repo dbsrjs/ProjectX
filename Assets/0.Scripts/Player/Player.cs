@@ -21,7 +21,7 @@ public abstract class Player : MonoBehaviour
     private float x, y;
     private int shieldCount;    //삽 갯수
 
-    protected int  shieldSpeed, level;  //삽 속도, 플레이어 레벨
+    protected int shieldSpeed, level;  //삽 속도, 플레이어 레벨
     protected float exp, maxExp, bulletTimer;   //현재 경험치, 최대 경험지, ??
 
     public int HP { get; set; } //현재 HP
@@ -51,16 +51,16 @@ public abstract class Player : MonoBehaviour
 
         transform.Translate(new Vector3(x, y, 0f) * Time.deltaTime * Speed);
 
-        if((x == 0 && y == 0) && HP != 0)
+        if ((x == 0 && y == 0) && HP != 0)
         {
             animator.SetTrigger("idle");    //서있는 이미지
         }
-        else if(HP != 0)
+        else if (HP != 0)
         {
             animator.SetTrigger("run");     //달리는 이미지
         }
 
-        if(x != 0)
+        if (x != 0)
         {
             sr.flipX = x < 0 ? true : false;    //보는 방향 변경(삼항식)
         }
@@ -68,33 +68,25 @@ public abstract class Player : MonoBehaviour
         shieldParent.Rotate(Vector3.back * Time.deltaTime * shieldSpeed);   //shield 오른쪽으로 회전
 
         Monster[] monsters = FindObjectsOfType<Monster>();
+        Box[] boxes = FindObjectOfType<Box>();
+
         List<Monster> atkMonsterList = new List<Monster>();
         bulletTimer += Time.deltaTime;
-
-        if (monsters.Length > 0 && bulletTimer > BulletFireDelayTime)
+        if (bulletTimer > BulletFireDelayTime)
         {
-            foreach (Monster m in monsters)
+            //박스를 우선적으로 타격
+            if (boxes.Length > 0)
             {
-                float distance = Vector3.Distance(transform.position, m.transform.position);
-                if(distance < 4)
-                {
-                    atkMonsterList.Add(m);
-                }
+                //박스가 있을경우 박스 타격
+                if (isShotDistanceBox(boxes))
+                    BoxAttack(boxes);
+                //박스 거리가 멀경우 몬스터를 타격
+                else
+                    ShotDistanceAttackMonster(monsters);
             }
+            else
+                ShotDistanceAttackMonster(monsters);
 
-            if(atkMonsterList.Count > 0)
-            {
-                Monster m = atkMonsterList[Random.Range(0, atkMonsterList.Count)];
-
-                // 타켓을 찾아 방향 전환
-                Vector2 vec = transform.position - m.transform.position;
-                float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
-                firePos.rotation = Quaternion.AngleAxis(angle - 180, Vector3.forward);
-
-                Bullet b = Instantiate(bullet, firePos);    //bullet 생성
-                b.SetHitMaxCount(BulletHitMaxCount + 1);
-                b.transform.SetParent(null);
-            }
             bulletTimer = 0;
         }
 
@@ -126,6 +118,89 @@ public abstract class Player : MonoBehaviour
         }
     }
 
+    void ShotDistanceAttackMonster(Monster[] monsters)
+    {
+        if (monsters.Length > 0 && bulletTimer > BulletFireDelayTime)
+        {
+            float minDistance = 4f;
+            Monster monster = null;
+            foreach (Monster m in monsters)
+            {
+                float distance = Vector3.Distance(transform.position, m.transform.position);
+                if (distance < 4 && m.hp > 0)
+                {
+                    minDistance = distance;
+                    monster = m;
+                    //atkMonsterList.Add(m);
+                }
+            }
+
+            /*
+            //범위 안에 있는 적을 타격
+            if(atkMonsterList.Count > 0)
+            {
+                Monster m = atkMonsterList[Random.Range(0, atkMonsterList.Count)];
+
+                // 타켓을 찾아 방향 전환
+                Vector2 vec = transform.position - m.transform.position;
+                float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
+                firePos.rotation = Quaternion.AngleAxis(angle - 180, Vector3.forward);
+
+                Bullet b = Instantiate(bullet, firePos);    //bullet 생성
+                b.SetHitMaxCount(BulletHitMaxCount + 1);
+                b.transform.SetParent(null);
+            }
+            */
+
+            //나와 가까운 적부터 타격
+            if (monster != null)
+            {
+                Vector2 vec = transform.position - monster.transform.position;
+                float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
+                firePos.rotation = Quaternion.AngleAxis(angle - 180, Vector3.forward);
+
+                Bullet b = Instantiate(bullet, firePos);    //bullet 생성
+                b.SetHitMaxCount(BulletHitMaxCount + 1);
+                b.transform.SetParent(null);
+            }
+        }
+    }
+
+    bool isShotDistanceBox(Box[] boxs)
+    {
+        float minDistance = 2f;
+        Box box = null;
+        foreach (var item in boxs)
+        {
+            float distance = Vector3.Distance(transform.position, item.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                box = item;
+            }
+        }
+
+        return box == null ? false : true;
+    }
+
+    void BoxAttack(Box[] boxs)
+    {
+        float minDistance = 2f;
+        Box box = null;
+        foreach (var item in boxs)
+        {
+            float distance = Vector3.Distance(transform.position, item.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                box = item;
+            }
+        }
+
+        Vector2 vec = transform.position - box.transform.position;
+        //float angle
+    }
+
     void Dead()
     {
         Ui.instance.ShowDeadPopup(level + 1);
@@ -144,18 +219,7 @@ public abstract class Player : MonoBehaviour
     {
         if(collision.GetComponent<Item>())
         {
-            collision.GetComponent<Item>().target = transform;     //target = player(Item)
             collision.GetComponent<Item>().isPickup = true;     //isPickup을 true로 변경
-        }
-
-        if (collision.gameObject.name == "Mag")
-        {
-            Item[] items = FindObjectsOfType<Item>();
-            foreach (var item in items)
-            {
-                item.target = transform;
-                item.isPickup = true;
-            }
         }
     }
 
