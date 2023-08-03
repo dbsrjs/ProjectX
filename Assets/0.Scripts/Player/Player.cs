@@ -68,7 +68,7 @@ public abstract class Player : MonoBehaviour
         shieldParent.Rotate(Vector3.back * Time.deltaTime * shieldSpeed);   //shield 오른쪽으로 회전
 
         Monster[] monsters = FindObjectsOfType<Monster>();
-        Box[] boxes = FindObjectOfType<Box>();
+        Box[] boxes = FindObjectsOfType<Box>();
 
         List<Monster> atkMonsterList = new List<Monster>();
         bulletTimer += Time.deltaTime;
@@ -80,10 +80,12 @@ public abstract class Player : MonoBehaviour
                 //박스가 있을경우 박스 타격
                 if (isShotDistanceBox(boxes))
                     BoxAttack(boxes);
+
                 //박스 거리가 멀경우 몬스터를 타격
                 else
                     ShotDistanceAttackMonster(monsters);
             }
+
             else
                 ShotDistanceAttackMonster(monsters);
 
@@ -120,14 +122,14 @@ public abstract class Player : MonoBehaviour
 
     void ShotDistanceAttackMonster(Monster[] monsters)
     {
-        if (monsters.Length > 0 && bulletTimer > BulletFireDelayTime)
+        if (monsters.Length > 0)
         {
             float minDistance = 4f;
             Monster monster = null;
             foreach (Monster m in monsters)
             {
                 float distance = Vector3.Distance(transform.position, m.transform.position);
-                if (distance < 4 && m.hp > 0)
+                if (minDistance  > distance && m.hp > 0)
                 {
                     minDistance = distance;
                     monster = m;
@@ -168,7 +170,7 @@ public abstract class Player : MonoBehaviour
 
     bool isShotDistanceBox(Box[] boxs)
     {
-        float minDistance = 2f;
+        float minDistance = 5f;
         Box box = null;
         foreach (var item in boxs)
         {
@@ -185,7 +187,7 @@ public abstract class Player : MonoBehaviour
 
     void BoxAttack(Box[] boxs)
     {
-        float minDistance = 2f;
+        float minDistance = 5f;
         Box box = null;
         foreach (var item in boxs)
         {
@@ -197,8 +199,15 @@ public abstract class Player : MonoBehaviour
             }
         }
 
+
+
         Vector2 vec = transform.position - box.transform.position;
-        //float angle
+        float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
+        firePos.rotation = Quaternion.AngleAxis(angle - 180, Vector3.forward);
+
+        Bullet b = Instantiate(bullet, firePos);
+        b.SetHitMaxCount(0);
+        b.transform.SetParent(null);
     }
 
     void Dead()

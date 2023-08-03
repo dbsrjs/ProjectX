@@ -34,7 +34,7 @@ public class MonsterSpawn : MonoBehaviour
             spawnTimer = 0;
             CrateMonster();    //함수 실행
 
-            spawnDelayTime = Random.Range(1f, 3f);
+            spawnDelayTime = Random.Range(5f, 10f);
         }
     }
 
@@ -42,9 +42,6 @@ public class MonsterSpawn : MonoBehaviour
     {
         this.monsters = monsters;
         this.parent = parent;
-        spawnDelayTime = 0f;
-        spawnDelayTime = float.MaxValue;
-
     }
 
     void CrateMonster()
@@ -52,7 +49,7 @@ public class MonsterSpawn : MonoBehaviour
         Vector2 v = RandomPosition(boxCollider);    //랜덤 위치
 
         int randSpawnCount = 0;
-        if (monsters.Length > (Ui.instance.KillCount / 10))    //몬스터의 수가 (죽은 몬스터 나누 10)보다 크다면
+        if (monsters.Length > (Ui.instance.KillCount / 10))    //몬스터의 수가 (죽은 몬스터 / 10)보다 크다면
         {
             randSpawnCount = (Ui.instance.KillCount / 10);
         }

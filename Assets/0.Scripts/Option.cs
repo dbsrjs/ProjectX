@@ -30,6 +30,7 @@ public class Option : MonoBehaviour
         string[] strSize = { "1920x1080", "1440x1080", "1280x720","1176x664", "720x576","720x480" };    //ÇØ»óµµ
 
         List<TMP_Dropdown.OptionData> odList = new List<TMP_Dropdown.OptionData>();
+
         foreach (var item in strSize)
         {
             TMP_Dropdown.OptionData data = new TMP_Dropdown.OptionData();
