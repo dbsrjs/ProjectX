@@ -9,6 +9,8 @@ public class MonsterSpawn : MonoBehaviour
     BoxCollider2D boxCollider;
     Player p;
 
+    Box box;
+
     float spawnTimer;
     float spawnDelayTime;
     // Start is called before the first frame update
@@ -34,7 +36,17 @@ public class MonsterSpawn : MonoBehaviour
             spawnTimer = 0;
             CrateMonster();    //함수 실행
 
-            spawnDelayTime = Random.Range(5f, 10f);
+            spawnDelayTime = Random.Range(0.8f, 2f);
+        }
+
+        if (box != null)
+        {
+            Vector2 v = RandomPosition(boxCollider);    //랜덤 위치
+
+            Instantiate(box, v, Quaternion.identity);   //box를 v(랜덤 위치)에 회전하지 않는 상태도 생성
+            transform.SetParent(null);     //Monster parget 지정
+
+            box = null;
         }
     }
 
@@ -59,7 +71,7 @@ public class MonsterSpawn : MonoBehaviour
         }
 
         int mRand = Random.Range(0, randSpawnCount);
-        Monster m = Instantiate(monsters[mRand], v, Quaternion.identity);   //몬스터 mRand을 v에 회전하지 않는 상태도 생성
+        Monster m = Instantiate(monsters[mRand], v, Quaternion.identity);   //몬스터 mRand을 v(랜덤 위치)에 회전하지 않는 상태도 생성
         m.SetPlayer(p);    //Monster Player 지정
         m.transform.SetParent(parent);     //Monster parget 지정
     }
@@ -74,5 +86,10 @@ public class MonsterSpawn : MonoBehaviour
         range.y = Random.Range((range.y / 2) * -1, range.y / 2);    //boxColl 크기 지정(Y)
 
         return pos + range;
+    }
+
+    public void SetBox(Box box)
+    {
+        this.box = box;
     }
 }

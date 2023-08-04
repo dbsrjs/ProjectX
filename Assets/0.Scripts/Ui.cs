@@ -72,11 +72,10 @@ public class Ui : MonoBehaviour
             gamestate = GameState.Pause;    //게임 일시 정지
             levelupPopup.gameObject.SetActive(true);    //LevelUp 창 표시
             Level = (++level) + 1;  //레벨 증가
-            if (GameManager.Insatnce.playerIndex == 0)
-                Debug.Log("test");
-            //p.BulletHitMaxCount++;
+            if (GameManager.Insatnce.playerIndex == 0)  //총알 관통 횟수 증가
+                p.BulletHitMaxCount++;
             else
-                p.BulletFireDelayTime -= p.BulletFireDelayTime * 0.2f;
+                p.BulletFireDelayTime -= p.BulletFireDelayTime * 0.2f;  //총알 연사속도 증가
             maxExp += 150;  //maxExp 증가
             sliderExp.value = 0f;   //레벨 바 초기화
             exp = 0;    //경험치 초기화
@@ -216,7 +215,6 @@ public class Ui : MonoBehaviour
     public void ShowDeadPopup(int level)
     {
         deadPopup.gameObject.SetActive(true);
-
         System.TimeSpan ts = System.TimeSpan.FromSeconds(timer);
         deadPopup.SetUi(killCount, level, ts);
     }

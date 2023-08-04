@@ -8,7 +8,8 @@ public abstract class Item : MonoBehaviour
     {
         Exp,
         Mag,
-        Health
+        Health,
+        Boom
     }
 
     public bool isPickup = false;
@@ -27,21 +28,27 @@ public abstract class Item : MonoBehaviour
         {
             p = GameManager.Insatnce.p;
         }
-
-        float distance = Vector3.Distance(transform.position, p.transform.position);    //둘 사이의 거리 계산
-        Vector3 vec = Vector3.zero;
-        transform.position = Vector3.SmoothDamp(transform.position, p.transform.position, ref vec, Time.deltaTime * 10f);    //target이 첫번째 포디션으로 이동
-        switch (type)
+        
+        if (isPickup == true)
         {
-            case Type.Exp:
-                Exp(distance);
-                break;
-            case Type.Health:
-                Health();
-                break;
-            case Type.Mag:
-                Magnet();
-                break;
+            Vector3 vec = Vector3.zero;
+            transform.position = Vector3.SmoothDamp(transform.position, p.transform.position, ref vec, Time.deltaTime * 10f);    //target이 첫번째 포디션으로 이동
+            float distance = Vector3.Distance(transform.position, p.transform.position);    //둘 사이의 거리 계산
+
+            switch (type)
+            {
+                case Type.Exp:
+                    Exp(distance);
+                    break;
+                case Type.Health:
+                    Health();
+                    break;
+                case Type.Mag:
+                    Magnet();
+                    break;
+                case Type.Boom:
+                    break;
+            }
         }
     }
 

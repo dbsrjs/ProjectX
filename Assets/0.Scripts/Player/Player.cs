@@ -29,7 +29,7 @@ public abstract class Player : MonoBehaviour
     public float Speed { get; set; }    //플레이어 속도
     public int BulletHitMaxCount { get; set; }  //총알 관통 횟수
 
-    public float BulletFireDelayTime { get; set; }  //총알 연사 속도  ??
+    public float BulletFireDelayTime { get; set; }  //총알 연사 속도
     public float Exp
     {
         get { return exp; }

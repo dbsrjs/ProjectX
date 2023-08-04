@@ -86,7 +86,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
             {
                 Destroy(collision.gameObject);     //Bullet 삭제
             }
-            Dead(0.5f, 20);  //0.5f, 20
+            Dead(0f, 0);  //0.5f, 20
         }
 
         else if (collision.GetComponent<Boom>())    //폭탄과 충돌
