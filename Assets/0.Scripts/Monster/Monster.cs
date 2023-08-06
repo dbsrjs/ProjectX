@@ -73,7 +73,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
         this.p = p;
     }
 
-    public IEnumerator OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.GetComponent<Shild>())   //Shield(삽)과 충돌
         {
@@ -86,17 +86,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
             {
                 Destroy(collision.gameObject);     //Bullet 삭제
             }
-            Dead(0f, 0);  //0.5f, 20
-        }
-
-        else if (collision.GetComponent<Boom>())    //폭탄과 충돌
-        {
-            yield return new WaitForSeconds(3f);
-            if (collision != null)
-            {
-                Destroy(collision.gameObject);
-                Dead(0f, 200);  //0f, 200
-            }
+            Dead(0.5f, 20);  //0.5f, 20
         }
     }
 

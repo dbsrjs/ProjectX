@@ -50,7 +50,9 @@ MonoBehaviour:
   items:
   - {fileID: 1183998073626792915, guid: 3a55cdb4728c2e946904e027b8de3288, type: 3}
   - {fileID: 7194625680196917995, guid: f6adcee71509a244e889fa6261481d93, type: 3}
-  - {fileID: 8815176515627073475, guid: 3f5d97e6affdcdc489f3fdb122a9b674, type: 3}
+  - {fileID: 6114156052473066940, guid: 4e6fee4fe0012264b8e8657e04976ced, type: 3}
+  - {fileID: 6114156052473066940, guid: bc2a680727ee107459287976d886da1b, type: 3}
+  - {fileID: 6114156052473066940, guid: 15c106b52ebb7b941b909887e4aa1f1c, type: 3}
 --- !u!212 &7805048994035328319
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -8,8 +8,7 @@ public abstract class Item : MonoBehaviour
     {
         Exp,
         Mag,
-        Health,
-        Boom
+        Health
     }
 
     public bool isPickup = false;
@@ -46,15 +45,13 @@ public abstract class Item : MonoBehaviour
                 case Type.Mag:
                     Magnet();
                     break;
-                case Type.Boom:
-                    break;
             }
         }
     }
 
     void Exp(float distance)
     {
-        if (distance < 1f)
+        if (distance < 3f)
         {
             p.Exp += exp;
             Destroy(gameObject);    //UI »èÁ¦

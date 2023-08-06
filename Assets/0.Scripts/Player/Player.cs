@@ -92,14 +92,9 @@ public abstract class Player : MonoBehaviour
             bulletTimer = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.F1))   //치트키
         {
             BulletHitMaxCount++;
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))    //폭탄 설치
-        {
-            Instantiate(boom, transform.position, transform.rotation);
         }
     }
 
@@ -137,6 +132,18 @@ public abstract class Player : MonoBehaviour
                 }
             }
 
+            //나와 가까운 적부터 타격
+            if (monster != null)
+            {
+                Vector2 vec = transform.position - monster.transform.position;
+                float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
+                firePos.rotation = Quaternion.AngleAxis(angle - 180, Vector3.forward);
+
+                Bullet b = Instantiate(bullet, firePos);    //bullet 생성
+                b.SetHitMaxCount(BulletHitMaxCount + 1);
+                b.transform.SetParent(null);
+            }
+
             /*
             //범위 안에 있는 적을 타격
             if(atkMonsterList.Count > 0)
@@ -153,18 +160,6 @@ public abstract class Player : MonoBehaviour
                 b.transform.SetParent(null);
             }
             */
-
-            //나와 가까운 적부터 타격
-            if (monster != null)
-            {
-                Vector2 vec = transform.position - monster.transform.position;
-                float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
-                firePos.rotation = Quaternion.AngleAxis(angle - 180, Vector3.forward);
-
-                Bullet b = Instantiate(bullet, firePos);    //bullet 생성
-                b.SetHitMaxCount(BulletHitMaxCount + 1);
-                b.transform.SetParent(null);
-            }
         }
     }
 
@@ -215,20 +210,20 @@ public abstract class Player : MonoBehaviour
         Ui.instance.ShowDeadPopup(level + 1);
     }
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Item>())
+        {
+            collision.GetComponent<Item>().isPickup = true;     //isPickup을 true로 변경
+        }
+    }
+
     public void Shield()
     {
         float z = 360 / shieldCount;
         for (int i = 0; i < shieldCount; i++)
         {
             shields[i].rotation = Quaternion.Euler(0, 0, z * i);    //Quaternion.Euler : 오브젝트를 회전시키는데 사용
-        }
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.GetComponent<Item>())
-        {
-            collision.GetComponent<Item>().isPickup = true;     //isPickup을 true로 변경
         }
     }
 
