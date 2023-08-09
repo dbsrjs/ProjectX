@@ -11,7 +11,8 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         HitCount = 0;
-        Destroy(gameObject, 2f);    //2초 후에 삭제
+        Invoke("End", 2f);
+        //Destroy(gameObject, 2f);    //2초 후에 삭제
     }
 
     // Update is called once per frame
@@ -26,5 +27,10 @@ public class Bullet : MonoBehaviour
     public void SetHitMaxCount(int count)
     {
         HitMaxCount = count;
+    }
+
+    void End()
+    {
+        BulletPool.Instance.End(this);
     }
 }

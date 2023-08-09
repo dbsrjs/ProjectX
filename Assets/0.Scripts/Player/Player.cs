@@ -46,6 +46,10 @@ public abstract class Player : MonoBehaviour
         if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            BulletFireDelayTime -= 0.1f;
+        }
         x = Input.GetAxis("Horizontal");    //플레이어 이동(A, D)
         y = Input.GetAxis("Vertical");      //플레이어 이동(W, S)
 
@@ -108,11 +112,16 @@ public abstract class Player : MonoBehaviour
 
         if (HP <= 0)    //죽었을 때
         {
-            Ui.instance.ShowDeadPopup(level + 1);
-            animator.SetTrigger("dead");
+            Ui.instance.gamestate = GameState.Stop;
 
-            Invoke("Dead", 2f);
+            animator.SetTrigger("dead");    //dead 애니메니션 실행
+            Invoke("Dead", 2f); //2초 후 Dead 함수 실행
         }
+    }
+
+    void Dead()
+    {
+        Ui.instance.ShowDeadPopup(level + 1);
     }
 
     void ShotDistanceAttackMonster(Monster[] monsters)
@@ -128,20 +137,23 @@ public abstract class Player : MonoBehaviour
                 {
                     minDistance = distance;
                     monster = m;
-                    //atkMonsterList.Add(m);
                 }
             }
 
             //나와 가까운 적부터 타격
             if (monster != null)
             {
+                //타겟을 찾아 방향 전환
                 Vector2 vec = transform.position - monster.transform.position;
                 float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
                 firePos.rotation = Quaternion.AngleAxis(angle - 180, Vector3.forward);
 
+                BulletPool.Instance.Create(transform.position, firePos, 0);
+                /*
                 Bullet b = Instantiate(bullet, firePos);    //bullet 생성
                 b.SetHitMaxCount(BulletHitMaxCount + 1);
                 b.transform.SetParent(null);
+                */
             }
 
             /*
@@ -187,28 +199,25 @@ public abstract class Player : MonoBehaviour
         foreach (var item in boxs)
         {
             float distance = Vector3.Distance(transform.position, item.transform.position);
-            if (distance < minDistance)
+            if (distance < minDistance) //item(box)와의 거리가 5f 미만일 때
             {
                 minDistance = distance;
                 box = item;
             }
         }
 
-
-
+        //타겟을 찾아 방향 전환
         Vector2 vec = transform.position - box.transform.position;
         float angle = Mathf.Atan2(vec.y, vec.x) * Mathf.Rad2Deg;
         firePos.rotation = Quaternion.AngleAxis(angle - 180, Vector3.forward);
 
+        BulletPool.Instance.Create(transform.position, firePos, 0); //Bullet 생성
+        /*
         Bullet b = Instantiate(bullet, firePos);
         b.SetHitMaxCount(0);
         b.transform.SetParent(null);
-    }
-
-    void Dead()
-    {
-        Ui.instance.ShowDeadPopup(level + 1);
-    }
+        */
+    }    
 
     public void OnTriggerEnter2D(Collider2D collision)
     {

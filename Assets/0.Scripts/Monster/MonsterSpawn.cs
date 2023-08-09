@@ -43,8 +43,8 @@ public class MonsterSpawn : MonoBehaviour
         {
             Vector2 v = RandomPosition(boxCollider);    //랜덤 위치
 
-            Instantiate(box, v, Quaternion.identity);   //box를 v(랜덤 위치)에 회전하지 않는 상태도 생성
-            transform.SetParent(null);     //Monster parget 지정
+            Box b = Instantiate(box, v, Quaternion.identity);   //box를 v(랜덤 위치)에 회전하지 않는 상태도 생성
+            b.transform.SetParent(null);     //Monster parget 지정
 
             box = null;
         }
@@ -54,6 +54,8 @@ public class MonsterSpawn : MonoBehaviour
     {
         this.monsters = monsters;
         this.parent = parent;
+        spawnDelayTime = 0f;
+        spawnTimer = float.MaxValue;
     }
 
     void CrateMonster()

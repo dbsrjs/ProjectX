@@ -12,7 +12,7 @@ public class DeadPopup : MonoBehaviour
 
     private void Start()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     public void SetUi(int zombieCnt, int level, System.TimeSpan timeSpan)

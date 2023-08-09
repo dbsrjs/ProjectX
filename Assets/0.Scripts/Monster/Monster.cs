@@ -15,7 +15,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
 
     private float atkTimer;
 
-    private float hitFrezeTimer;    //일시 정지
+    private float hitFrezeTimer;    //일시 정지 시간
 
     // Update is called once per frame
 
@@ -77,20 +77,21 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
     {
         if(collision.GetComponent<Shild>())   //Shield(삽)과 충돌
         {
-            Dead(0.2f, 30); //0.2f, 30
+            Hit(0.2f, 30); //0.2f, 30
         }
         else if(collision.GetComponent<Bullet>())    //총알과 충돌
         {
             collision.GetComponent<Bullet>().HitCount++;    //HitCount 증가
             if (collision.GetComponent<Bullet>().HitCount >= collision.GetComponent<Bullet>().HitMaxCount)  //HitCount가 HitMaxCount보다 크다면
             {
-                Destroy(collision.gameObject);     //Bullet 삭제
+                //Destroy(collision.gameObject);     //Bullet 삭제
+                BulletPool.Instance.End(collision.GetComponent<Bullet>());
             }
-            Dead(0.5f, 20);  //0.5f, 20
+            Hit(0.5f, 20);  //0.5f, 20
         }
     }
 
-    public void Dead(float frezeTime, int damage)
+    public void Hit(float frezeTime, int damage)
     {
         hitFrezeTimer = frezeTime;  //hitFrezeTimer 값 지정
         hp -= damage;   //데미지에 비례해서 hp 감소

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Option : MonoBehaviour
 {
@@ -67,5 +68,10 @@ public class Option : MonoBehaviour
         string sizeTxt = dropDown.options[dd.value].text;
         string[] size = sizeTxt.Split('x');
         Screen.SetResolution(int.Parse(size[0]), int.Parse(size[1]), false);
+    }
+
+    public void OnExit()
+    {
+        SceneManager.LoadScene("Main");
     }
 }
