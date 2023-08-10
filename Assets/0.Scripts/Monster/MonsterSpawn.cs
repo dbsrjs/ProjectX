@@ -22,7 +22,7 @@ public class MonsterSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
+        if (Ui.Instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
         if (p == null && GameManager.Insatnce != null)
@@ -63,9 +63,9 @@ public class MonsterSpawn : MonoBehaviour
         Vector2 v = RandomPosition(boxCollider);    //랜덤 위치
 
         int randSpawnCount = 0;
-        if (monsters.Length > (Ui.instance.KillCount / 10))    //몬스터의 수가 (죽은 몬스터 / 10)보다 크다면
+        if (monsters.Length > (Ui.Instance.KillCount / 10))    //몬스터의 수가 (죽은 몬스터 / 10)보다 크다면
         {
-            randSpawnCount = (Ui.instance.KillCount / 10);
+            randSpawnCount = (Ui.Instance.KillCount / 10);
         }
         else
         {
@@ -93,5 +93,16 @@ public class MonsterSpawn : MonoBehaviour
     public void SetBox(Box box)
     {
         this.box = box;
+    }
+
+    /// <summary>
+    /// 총알이 벽에 충돌 했을 때 사용이 끝난다고 판단
+    /// </summary>
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Bullet>())
+        {
+            collision.GetComponent<Bullet>().End();
+        }
     }
 }

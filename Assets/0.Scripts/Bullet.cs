@@ -11,14 +11,14 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         HitCount = 0;
-        Invoke("End", 2f);
+        Invoke("End", 2f);  //2초 후 End 함수 실행
         //Destroy(gameObject, 2f);    //2초 후에 삭제
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
+        if (Ui.Instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
         transform.Translate(Vector3.right * Time.deltaTime * 15f);    //오른쪽으로 회전
@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
         HitMaxCount = count;
     }
 
-    void End()
+    public void End()
     {
         BulletPool.Instance.End(this);
     }

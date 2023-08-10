@@ -29,7 +29,7 @@ public class Box : MonoBehaviour
         if (collision.GetComponent<Bullet>())
         {
             Hit(15);
-            Destroy(collision.gameObject);
+            BulletPool.Instance.End(collision.GetComponent<Bullet>());
         }
     }
 }

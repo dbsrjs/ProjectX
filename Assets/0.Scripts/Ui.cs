@@ -31,10 +31,8 @@ public class UpgradeUI
 }
 
 // 아이템 : 삽, 엽총, 음료수(피회복), 전투장화, 전투장갑
-public class Ui : MonoBehaviour
+public class Ui : Singleton<Ui>
 {
-    public static Ui instance;
-
     [HideInInspector] public GameState gamestate = GameState.Stop;
 
     [SerializeField] private UpgradeData[] upData;
@@ -100,11 +98,6 @@ public class Ui : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        instance = this;
-    }
-
     void Start()
     {
         OnGameStart();  //게임 시작
@@ -113,10 +106,18 @@ public class Ui : MonoBehaviour
         for (int i = 0; i < boxColls.Length; i++)   // 몬스터 스폰 오브젝트 위치 고정
         {
             Vector2 v1 = canvas.sizeDelta;
+
             if (i < 2)
+            {
+                v1.x += 50;
                 v1.y = 5;
+
+            }
             else
+            {
                 v1.x = 5;
+                v1.y =+ 50;
+            }
             boxColls[i].size = v1;
         }
 

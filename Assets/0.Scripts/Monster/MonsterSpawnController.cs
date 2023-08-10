@@ -11,7 +11,6 @@ public class MonsterSpawnController : MonoBehaviour
 
     [SerializeField] private Box box;
 
-    float boxCreatTimer = 0;
     void Start()
     {
         foreach (var mon in monsterSpawns)

@@ -8,18 +8,21 @@ using UnityEngine.SceneManagement;
 public class Option : MonoBehaviour
 {
     public static Option instance;
+    [SerializeField] private GameObject option; //본인
 
-    [SerializeField] private AudioSource bmgSource;
-    [SerializeField] private AudioSource fxSource;
-    [SerializeField] private TMP_Dropdown dropDown;
-    [SerializeField] private Slider bgmSlider;
-    [SerializeField] private Slider fxSlider;
-    [SerializeField] private TMP_Text bgmTxt;
-    [SerializeField] private TMP_Text fxTxt;
+    [SerializeField] private AudioSource bmgSource; //배경음 설정
+    [SerializeField] private AudioSource fxSource;  //효과음 설정
+    [SerializeField] private TMP_Dropdown dropDown; //해상도
+    [SerializeField] private Slider bgmSlider;  //배경음 Slider
+    [SerializeField] private Slider fxSlider;   //효과음 Slider
+    [SerializeField] private TMP_Text bgmTxt;   //배경음 텍스트
+    [SerializeField] private TMP_Text fxTxt;    //효과음 텍스트
+    [SerializeField] private GameObject exit;   //exit panel
 
     private void Awake()
-    {
+    {        
         instance = this;
+        option.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -43,12 +46,13 @@ public class Option : MonoBehaviour
 
     public void OnEnable()     // 게임 오브젝트가 켜질때 작동
     {
-        Ui.instance.gamestate = GameState.Pause;
+        Ui.Instance.gamestate = GameState.Pause;
+        exit.SetActive(false);
     }
     
     public void OnDisable()    // 게임 오브젝트가 꺼질때 작동
     {
-        Ui.instance.gamestate = GameState.Play;
+        Ui.Instance.gamestate = GameState.Play;
     }
 
     public void OnBGMValueChange(Slider slider)    //배경음 설정
@@ -70,8 +74,18 @@ public class Option : MonoBehaviour
         Screen.SetResolution(int.Parse(size[0]), int.Parse(size[1]), false);
     }
 
+    public void OnPanel()
+    {
+        exit.SetActive(true);
+    }
+
     public void OnExit()
     {
         SceneManager.LoadScene("Main");
+    }
+
+    public void OnContinue()
+    {
+        exit.SetActive(false);
     }
 }

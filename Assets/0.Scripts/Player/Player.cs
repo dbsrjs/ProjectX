@@ -36,14 +36,14 @@ public abstract class Player : MonoBehaviour
         set
         {
             exp = value;
-            Ui.instance.SetExp(ref exp, ref maxExp, ref level);
+            Ui.Instance.SetExp(ref exp, ref maxExp, ref level);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
+        if (Ui.Instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
         if (Input.GetKeyDown(KeyCode.F1))
@@ -104,15 +104,15 @@ public abstract class Player : MonoBehaviour
 
     public void Hit(int damage)    //damage = power(Monster) = 10;
     {
-        if (Ui.instance.gamestate != GameState.Play)
+        if (Ui.Instance.gamestate != GameState.Play)
             return;
 
         HP -= damage;   //HP 감소
-        Ui.instance.SetHP(HP, MaxHP);
+        Ui.Instance.SetHP(HP, MaxHP);
 
         if (HP <= 0)    //죽었을 때
         {
-            Ui.instance.gamestate = GameState.Stop;
+            Ui.Instance.gamestate = GameState.Stop;
 
             animator.SetTrigger("dead");    //dead 애니메니션 실행
             Invoke("Dead", 2f); //2초 후 Dead 함수 실행
@@ -121,7 +121,7 @@ public abstract class Player : MonoBehaviour
 
     void Dead()
     {
-        Ui.instance.ShowDeadPopup(level + 1);
+        Ui.Instance.ShowDeadPopup(level + 1);
     }
 
     void ShotDistanceAttackMonster(Monster[] monsters)

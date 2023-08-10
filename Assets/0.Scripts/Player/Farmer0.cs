@@ -20,6 +20,6 @@ public class Farmer0 : Player   //³²Ä³
         maxExp = 100;
 
         level = 0;
-        Ui.instance.Level = level + 1;
+        Ui.Instance.Level = level + 1;
     }
 }

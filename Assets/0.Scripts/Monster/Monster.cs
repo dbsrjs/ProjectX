@@ -23,7 +23,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
     void Update()
     {
 
-        if (Ui.instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
+        if (Ui.Instance.gamestate != GameState.Play)    //GameState가 Play가 아니라면
             return;
 
         if (p == null && GameManager.Insatnce != null)
@@ -109,7 +109,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
 
     IEnumerator CDropExp()
     {
-        Ui.instance.KillCount++;    //KillCount Text 증가
+        Ui.Instance.KillCount++;    //KillCount Text 증가
         yield return new WaitForSeconds(1f);    //1초 후
         // 경험치 아이템 드랍률
         // TODO : 가중치 랜덤 확률로 변경 해야함

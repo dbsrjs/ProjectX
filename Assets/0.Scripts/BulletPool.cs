@@ -14,14 +14,12 @@ public class BulletPool : Singleton<BulletPool>
         q.Clear();
     }
 
-
     public void Create(Vector3 startPos, Transform firePos, int count)
     {
         Bullet b = null;
         if(q.Count == 0)
         {
-            b = Instantiate(bullet);    //bullet 持失
-            b.transform.SetParent(parent);
+            b = Instantiate(bullet, parent);    //bullet 持失
         }
         else
         {
@@ -35,9 +33,7 @@ public class BulletPool : Singleton<BulletPool>
 
     public void End(Bullet b)
     {
-        b.CancelInvoke("End");
         b.gameObject.SetActive(false);
-
         q.Enqueue(b);
     }
 }
