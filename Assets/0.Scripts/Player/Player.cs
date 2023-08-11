@@ -14,7 +14,6 @@ public abstract class Player : MonoBehaviour
     protected Animator animator;
     protected SpriteRenderer sr;
 
-    [SerializeField] private Transform boom;
 
     private List<Transform> shields = new List<Transform>();
 
@@ -23,7 +22,7 @@ public abstract class Player : MonoBehaviour
 
     protected int shieldSpeed, level;  //삽 속도, 플레이어 레벨
     protected float exp, maxExp, bulletTimer;   //현재 경험치, 최대 경험지, ??
-
+    
     public int HP { get; set; } //현재 HP
     public int MaxHP { get; set; }  //최대 HP
     public float Speed { get; set; }    //플레이어 속도
@@ -39,6 +38,50 @@ public abstract class Player : MonoBehaviour
             Ui.Instance.SetExp(ref exp, ref maxExp, ref level);
         }
     }
+
+    /*
+    test
+
+    public int speed = 5;
+    public Vector3 nextPos;
+    Rigidbody2D rigid;
+    Animator ani;
+    SpriteRenderer sprite;
+
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        ani = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    void Move()
+    {
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        nextPos = new Vector3(h, v, 0);
+        transform.position = transform.position + nextPos.normalized * Speed * Time.fixedDeltaTime;
+        rigid.velocity = Vector3.zero;
+
+        if (h < 0)
+            sprite.flipX = true;
+        else if (h > 0)
+            sprite.flipX = false;
+
+        if (h != 0 || v != 0)
+            ani.SetBool("idle", true);
+        else
+            ani.SetBool("idle", false);
+    }
+
+    test
+    */
+
 
     // Update is called once per frame
     void Update()
@@ -212,6 +255,7 @@ public abstract class Player : MonoBehaviour
         firePos.rotation = Quaternion.AngleAxis(angle - 180, Vector3.forward);
 
         BulletPool.Instance.Create(transform.position, firePos, 0); //Bullet 생성
+
         /*
         Bullet b = Instantiate(bullet, firePos);
         b.SetHitMaxCount(0);
