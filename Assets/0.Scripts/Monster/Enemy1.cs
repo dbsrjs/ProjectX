@@ -6,8 +6,8 @@ public class Enemy1 : Monster
 {
     void Start()
     {
-        atkTime = 2f;
-        power = 20;
-        hp = 80;
+        atkTime = 1.2f;
+        power = 30;
+        hp = 120;
     }
 }

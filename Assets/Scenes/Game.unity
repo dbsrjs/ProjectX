@@ -22358,7 +22358,7 @@ MonoBehaviour:
   - sprite: {fileID: -205726582, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
     title: "\uCD1D"
     desc1: "\uBC1C\uC0AC\uCCB4 +1"
-    desc2: "\uB370\uBBF8\uC9C0\uAC00 \uB192\uC740 \uCD1D\uC54C \uBC1C\uC0AC"
+    desc2: "\uAD00\uD1B5\uB825\uC774 \uC88B\uC740 \uCD1D\uC54C \uBC1C\uC0AC"
   - sprite: {fileID: -201829820, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
     title: "\uC804\uD22C \uC7A5\uAC11"
     desc1: "\uD328\uC2DC\uBE0C"
@@ -22370,7 +22370,11 @@ MonoBehaviour:
   - sprite: {fileID: 927338625, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
     title: "\uC5D0\uB108\uC9C0 \uB4DC\uB9C1\uD06C"
     desc1: "\uD53C\uD68C\uBCF5 100%"
-    desc2: 
+    desc2: "HP \uC99D\uAC00"
+  - sprite: {fileID: -1002307068, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+    title: "\uB370\uBBF8\uC9C0"
+    desc1: "\uACF5\uACA9\uB825 \uC99D\uAC00"
+    desc2: "\uAC15\uD654\uB41C \uCD1D\uC54C \uBC1C"
   upUI:
   - icon: {fileID: 2088687782}
     levelTxt: {fileID: 1849360940}

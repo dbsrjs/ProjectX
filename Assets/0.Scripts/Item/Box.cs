@@ -16,6 +16,7 @@ public class Box : MonoBehaviour
     public void Hit(float damage)
     {
         Hp -= damage;
+        AudioManager.instance.Play("hit1");    //hit 소리 실행
         if (Hp <= 0 && items.Length > 0)
         {
             int rand = Random.Range(0, items.Length);

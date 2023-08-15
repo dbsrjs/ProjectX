@@ -21,14 +21,15 @@ public abstract class Player : MonoBehaviour
     private int shieldCount;    //삽 갯수
 
     protected int shieldSpeed, level;  //삽 속도, 플레이어 레벨
-    protected float exp, maxExp, bulletTimer;   //현재 경험치, 최대 경험지, ??
-    
+    protected float exp, maxExp, bulletTimer;   //현재 경험치, 최대 경험지, Time.deltaTime
+
     public int HP { get; set; } //현재 HP
     public int MaxHP { get; set; }  //최대 HP
     public float Speed { get; set; }    //플레이어 속도
     public int BulletHitMaxCount { get; set; }  //총알 관통 횟수
 
     public float BulletFireDelayTime { get; set; }  //총알 연사 속도
+
     public float Exp
     {
         get { return exp; }
@@ -38,50 +39,6 @@ public abstract class Player : MonoBehaviour
             Ui.Instance.SetExp(ref exp, ref maxExp, ref level);
         }
     }
-
-    /*
-    test
-
-    public int speed = 5;
-    public Vector3 nextPos;
-    Rigidbody2D rigid;
-    Animator ani;
-    SpriteRenderer sprite;
-
-    private void Awake()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-        ani = GetComponent<Animator>();
-        sprite = GetComponent<SpriteRenderer>();
-    }
-
-    private void FixedUpdate()
-    {
-        Move();
-    }
-
-    void Move()
-    {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        nextPos = new Vector3(h, v, 0);
-        transform.position = transform.position + nextPos.normalized * Speed * Time.fixedDeltaTime;
-        rigid.velocity = Vector3.zero;
-
-        if (h < 0)
-            sprite.flipX = true;
-        else if (h > 0)
-            sprite.flipX = false;
-
-        if (h != 0 || v != 0)
-            ani.SetBool("idle", true);
-        else
-            ani.SetBool("idle", false);
-    }
-
-    test
-    */
-
 
     // Update is called once per frame
     void Update()
@@ -145,7 +102,7 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-    public void Hit(int damage)    //damage = power(Monster) = 10;
+    public void Hit(int damage)    //damage = power(Monster)
     {
         if (Ui.Instance.gamestate != GameState.Play)
             return;
@@ -224,7 +181,7 @@ public abstract class Player : MonoBehaviour
         Box box = null;
         foreach (var item in boxs)
         {
-            float distance = Vector3.Distance(transform.position, item.transform.position);
+            float distance = Vector3.Distance(transform.position, item.transform.position); //둘 사이의 거리 계산
             if (distance < minDistance)
             {
                 minDistance = distance;
@@ -241,7 +198,7 @@ public abstract class Player : MonoBehaviour
         Box box = null;
         foreach (var item in boxs)
         {
-            float distance = Vector3.Distance(transform.position, item.transform.position);
+            float distance = Vector3.Distance(transform.position, item.transform.position); //둘 사이의 거리 계산
             if (distance < minDistance) //item(box)와의 거리가 5f 미만일 때
             {
                 minDistance = distance;
@@ -265,6 +222,7 @@ public abstract class Player : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (collision.GetComponent<Item>())
         {
             collision.GetComponent<Item>().isPickup = true;     //isPickup을 true로 변경
@@ -273,7 +231,9 @@ public abstract class Player : MonoBehaviour
 
     public void Shield()
     {
+        Rigidbody rb = GetComponent<Rigidbody>();
         float z = 360 / shieldCount;
+
         for (int i = 0; i < shieldCount; i++)
         {
             shields[i].rotation = Quaternion.Euler(0, 0, z * i);    //Quaternion.Euler : 오브젝트를 회전시키는데 사용

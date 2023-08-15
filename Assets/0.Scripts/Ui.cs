@@ -57,7 +57,12 @@ public class Ui : Singleton<Ui>
 
     private List<UpgradeData> upgradeDatas = new List<UpgradeData>();
     private Player p;
+    private Monster m;
 
+    public void OnGameStart()
+    {
+        gamestate = GameState.Play;
+    }
 
     public void SetExp(ref float exp, ref float maxExp, ref int level)  //Level
     {
@@ -73,7 +78,8 @@ public class Ui : Singleton<Ui>
             if (GameManager.Insatnce.playerIndex == 0)  //총알 관통 횟수 증가
                 p.BulletHitMaxCount++;
             else
-                p.BulletFireDelayTime -= p.BulletFireDelayTime * 0.2f;  //총알 연사속도 증가
+                p.BulletFireDelayTime -= p.BulletFireDelayTime * 0.05f;  //총알 연사속도 증가(0.05f)
+                
             maxExp += 150;  //maxExp 증가
             sliderExp.value = 0f;   //레벨 바 초기화
             exp = 0;    //경험치 초기화
@@ -100,7 +106,7 @@ public class Ui : Singleton<Ui>
 
     void Start()
     {
-        OnGameStart();  //게임 시작
+        OnGameStart();  //게임 시작(GameState = Play)
         sliderExp.value = 0f;
         
         for (int i = 0; i < boxColls.Length; i++)   // 몬스터 스폰 오브젝트 위치 고정
@@ -149,11 +155,6 @@ public class Ui : Singleton<Ui>
         hpImg.fillAmount = (float)HP / maxHP;
     }    
 
-    public void OnGameStart()
-    {
-        gamestate = GameState.Play;
-    }
-
     void SetUpgradeData()
     {
         List<UpgradeData> datas = new List<UpgradeData>();
@@ -194,26 +195,30 @@ public class Ui : Singleton<Ui>
         Debug.Log(upgradeDatas[index].sprite.name);
         switch(upgradeDatas[index].sprite.name)
         {
-            case "Select 0":
-                p.AddShild();   //삽 추가
+            case "Select 0":   //삽 추가
+                p.AddShild();
                 break;
-            case "Select 3":
-                p.BulletHitMaxCount++;  //총알 관통 횟수 증가
+            case "Select 3":  //총알 관통력 증가
+                p.BulletHitMaxCount++;
                 break;
-            case "Select 6":
-                p.BulletFireDelayTime -= p.BulletFireDelayTime * 0.1f;  //총알 연사속도 증가
+            case "Select 6":  //총알 연사속도 증가
+                p.BulletFireDelayTime -= p.BulletFireDelayTime * 0.1f;
                 break;
-            case "Select 7":
-                p.Speed += 2f;  //플레이어 속도 증가
+            case "Select 7":  //플레이어 속도 증가
+                p.Speed += 0.5f;
                 break;
-            case "Select 8":
-                p.HP = p.MaxHP; //최대 HP 증가
-                SetHP(p.HP, p.MaxHP);
+            case "Select 8": //피회복 100%
+                p.HP = p.MaxHP;
+                SetHP(p.HP, p.MaxHP);                
                 break;
+            case "Select 9":    //공격력 증가
+                m.damage += 10;
+                break;
+
         }
     }
 
-    public void ShowDeadPopup(int level)
+    public void ShowDeadPopup(int level)    //deadPopup
     {
         deadPopup.gameObject.SetActive(true);
         System.TimeSpan ts = System.TimeSpan.FromSeconds(timer);
