@@ -13,6 +13,8 @@ public class MonsterSpawn : MonoBehaviour
 
     float spawnTimer;
     float spawnDelayTime;
+
+    float time;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,8 @@ public class MonsterSpawn : MonoBehaviour
         }
 
         spawnTimer += Time.deltaTime;
+        time += Time.deltaTime;
+
         if (spawnTimer > spawnDelayTime)    //spawnTimer가 0.2f 이상이라면
         {
             spawnTimer = 0;
@@ -88,6 +92,14 @@ public class MonsterSpawn : MonoBehaviour
         range.y = Random.Range((range.y / 2) * -1, range.y / 2);    //boxColl 크기 지정(Y)
 
         return pos + range;
+    }
+
+    private void Time30s()  //test
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            CrateMonster();
+        }
     }
 
     public void SetBox(Box box)

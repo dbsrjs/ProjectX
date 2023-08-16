@@ -7,9 +7,11 @@ public class Bullet : MonoBehaviour
     public int HitCount { get; set; }
     public int HitMaxCount { get; set; }
 
+    public int power { get; set; }
     // Start is called before the first frame update
     void Start()
     {
+        power = 20;
         HitCount = 0;
         Invoke("End", 2f);  //2초 후 End 함수 실행
         //Destroy(gameObject, 2f);    //2초 후에 삭제

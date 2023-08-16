@@ -51,7 +51,7 @@ public abstract class Item : MonoBehaviour
 
     void Exp(float distance)
     {
-        if (distance < 3f)
+        if (distance < 0.6f)  //0.6f
         {
             p.Exp += exp;
             Destroy(gameObject);    //UI »èÁ¦

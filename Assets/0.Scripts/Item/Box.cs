@@ -10,7 +10,7 @@ public class Box : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Hp = 50;
+        Hp = 30;
     }
 
     public void Hit(float damage)

@@ -39,8 +39,6 @@ public class Ui : Singleton<Ui>
     [SerializeField] private UpgradeUI[] upUI;
     [SerializeField] private DeadPopup deadPopup;
 
-
-
     [SerializeField] private RectTransform canvas;
     [SerializeField] private Transform levelupPopup;
     
@@ -52,12 +50,15 @@ public class Ui : Singleton<Ui>
     [SerializeField] private Text txtLv;
     [SerializeField] private Image hpImg;
 
+    private Player p;
+    private Monster m;
+    private Shild shild;
+    private Bullet bullet;
+
     private float timer = 0;
     private int killCount = 0;
 
     private List<UpgradeData> upgradeDatas = new List<UpgradeData>();
-    private Player p;
-    private Monster m;
 
     public void OnGameStart()
     {
@@ -115,14 +116,14 @@ public class Ui : Singleton<Ui>
 
             if (i < 2)
             {
-                v1.x += 50;
+                v1.x = 270;
                 v1.y = 5;
 
             }
             else
             {
                 v1.x = 5;
-                v1.y =+ 50;
+                v1.y = 200;
             }
             boxColls[i].size = v1;
         }
@@ -195,14 +196,15 @@ public class Ui : Singleton<Ui>
         Debug.Log(upgradeDatas[index].sprite.name);
         switch(upgradeDatas[index].sprite.name)
         {
-            case "Select 0":   //삽 추가
+            case "Select 0":   //삽 갯수 추가
                 p.AddShild();
                 break;
             case "Select 3":  //총알 관통력 증가
                 p.BulletHitMaxCount++;
                 break;
-            case "Select 6":  //총알 연사속도 증가
-                p.BulletFireDelayTime -= p.BulletFireDelayTime * 0.1f;
+            case "Select 6":  //무기 속도 증가
+                p.BulletFireDelayTime -= p.BulletFireDelayTime * 0.07f;
+                p.shieldSpeed += 20;
                 break;
             case "Select 7":  //플레이어 속도 증가
                 p.Speed += 0.5f;
@@ -211,10 +213,11 @@ public class Ui : Singleton<Ui>
                 p.HP = p.MaxHP;
                 SetHP(p.HP, p.MaxHP);                
                 break;
-            case "Select 9":    //공격력 증가
-                m.damage += 10;
+            case "Select 9":    //무기 공격력 증가
+                    bullet.power += 200;
+                    shild.power += 200;
+                    Debug.Log("test");
                 break;
-
         }
     }
 

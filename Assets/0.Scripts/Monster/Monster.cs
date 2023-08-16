@@ -76,7 +76,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
     {
         if(collision.GetComponent<Shild>())   //Shield(삽)과 충돌
         {
-            Hit(0.2f, 30); //0.4f, 30
+            Hit(0.2f, collision.GetComponent<Shild>().power); //0.4f, 30
         }
         else if(collision.GetComponent<Bullet>())    //총알과 충돌
         {
@@ -86,7 +86,7 @@ public abstract class Monster : MonoBehaviour   //abstract : 추상 클래스
                 //Destroy(collision.gameObject);     //Bullet 삭제
                 BulletPool.Instance.End(collision.GetComponent<Bullet>());
             }
-            Hit(0.5f, 20);  //0.2f, 20
+            Hit(0.5f, collision.GetComponent<Bullet>().power);  //0.2f, 20
         }
     }
 

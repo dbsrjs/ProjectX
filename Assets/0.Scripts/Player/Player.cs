@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class Player : MonoBehaviour
 {
-
     [SerializeField] private Transform shildPrefab;
     [SerializeField] private Transform shieldParent;
 
@@ -20,7 +19,7 @@ public abstract class Player : MonoBehaviour
     private float x, y;
     private int shieldCount;    //삽 갯수
 
-    protected int shieldSpeed, level;  //삽 속도, 플레이어 레벨
+    [SerializeField] public int shieldSpeed, level;  //삽 속도, 플레이어 레벨
     protected float exp, maxExp, bulletTimer;   //현재 경험치, 최대 경험지, Time.deltaTime
 
     public int HP { get; set; } //현재 HP
@@ -48,8 +47,9 @@ public abstract class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            BulletFireDelayTime -= 0.1f;
+            BulletFireDelayTime -= BulletFireDelayTime * 0.07f;
         }
+
         x = Input.GetAxis("Horizontal");    //플레이어 이동(A, D)
         y = Input.GetAxis("Vertical");      //플레이어 이동(W, S)
 
@@ -96,7 +96,7 @@ public abstract class Player : MonoBehaviour
             bulletTimer = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.F1))   //치트키
+        if (Input.GetKey(KeyCode.F1))   //치트키
         {
             BulletHitMaxCount++;
         }
@@ -231,7 +231,6 @@ public abstract class Player : MonoBehaviour
 
     public void Shield()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
         float z = 360 / shieldCount;
 
         for (int i = 0; i < shieldCount; i++)
