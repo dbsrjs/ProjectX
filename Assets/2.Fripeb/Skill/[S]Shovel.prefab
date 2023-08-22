@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6224847039616117663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6224847039616117662}
+  - component: {fileID: 6224847039616117661}
+  m_Layer: 8
+  m_Name: '[S]Shovel'
+  m_TagString: Bullet
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6224847039616117662
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6224847039616117663}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6224847039616117661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6224847039616117663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fba534dd2bf6f7643bb7587bebf6a394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  Name: "\uC0BD"
+  Lores:
+  - "\uD50C\uB808\uC774\uC5B4\uB97C \uB530\uB77C \uD68C\uC804\uD558\uB294 \uC0BD\uC744
+    1\uAC1C \uC0DD\uC131\uD569\uB2C8\uB2E4"
+  - "\uC0BD\uC774 1\uAC1C \uB354 \uC0DD\uC131\uB429\uB2C8\uB2E4"
+  - "\uC0BD\uC774 1\uAC1C \uB354 \uC0DD\uC131\uB429\uB2C8\uB2E4"
+  - "\uD68C\uC804 \uC18D\uB3C4\uAC00 50% \uBE68\uB77C\uC9D1\uB2C8\uB2E4"
+  - "\uC0BD\uC774 1\uAC1C \uB354 \uC0DD\uC131\uB429\uB2C8\uB2E4"
+  - "\uC0BD\uC774 1\uAC1C \uB354 \uC0DD\uC131\uB429\uB2C8\uB2E4"
+  - "\uD68C\uC804 \uC18D\uB3C4\uAC00 50% \uBE68\uB77C\uC9D1\uB2C8\uB2E4"
+  - "\uBB34\uAE30\uB97C \uC644\uC131\uD569\uB2C8\uB2E4"
+  skillUpgrads:
+  - Name: "\uC0BD\uC9C8"
+    Lore: "\uC0BD\uC774 5\uAC1C \uB354 \uC0DD\uC131\uB429\uB2C8\uB2E4 \uD53C\uD574\uB7C9\uC774
+      20% \uAC10\uC18C\uD569\uB2C8\uB2E4"
+  - Name: "\uBE60\uB978 \uD68C\uC804"
+    Lore: "\uD68C\uC804 \uC18D\uB3C4\uAC00 500% \uBE68\uB77C\uC9D1\uB2C8\uB2E4"
+  - Name: "\uC2E0\uC758 \uC0BD"
+    Lore: "\uC0BD\uC774 \uD558\uB098\uB85C \uD569\uCCD0\uC9C0\uBA70 \uC0BD \uAC2F\uC218
+      \uD558\uB098\uB2F9 \uD53C\uD574\uB7C9 100%\uC99D\uAC00"
+  skillType: 1
+  shlid_Object: {fileID: 4277054654933101537, guid: 8dd783616d2a7d54380113b6878e287e, type: 3}

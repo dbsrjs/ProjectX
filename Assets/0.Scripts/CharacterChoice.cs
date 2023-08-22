@@ -5,10 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class CharacterChoice : MonoBehaviour
 {
-    public void OnChoice(int index)
+    
+    public void onChoise(int index)
     {
-        GameManager.Insatnce.playerIndex = index;
+        GameManager.instance.playerIdx = index;
+        SceneManager.LoadScene("Game");
+    }
 
-        SceneManager.LoadScene("Game");    //Game Scene으로 이동
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }
