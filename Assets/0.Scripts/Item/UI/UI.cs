@@ -70,7 +70,6 @@ public class UI : Singleton<UI>
     // Start is called before the first frame update
     void Start()
     {
-
         txt_Lv.text = $"Lv.1";
         option = new Stats(new string[] { "time:0", "killcount:0", "panal:3" });
     }
@@ -79,6 +78,11 @@ public class UI : Singleton<UI>
     void Update()
     {
         if(gamestate != GameState.Play) return;
+
+        if (Input.GetKey(KeyCode.F1))
+        {
+            AddExp(5);
+        }
 
         if (sliderExp.value >= 1)
         {
