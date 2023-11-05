@@ -18,7 +18,6 @@ public class SkillUpgradPanal : Singleton<SkillUpgradPanal>
     {
         int i = 0;
         this.skill = skill;
-        UI.Instance.gamestate = GameState.Stop;
         gameObject.SetActive(true);
 
 

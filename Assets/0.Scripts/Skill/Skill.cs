@@ -51,6 +51,7 @@ public class Skill : MonoBehaviour
             if (lv_max == lv + 1 && skillUpgrads.Count > 0)
             {
                 SkillUpgradPanal.Instance.Open(this);
+                UI.Instance.gamestate = GameState.Pause;
             }
             else
             {
